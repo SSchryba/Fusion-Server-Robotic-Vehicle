@@ -1,0 +1,505 @@
+{
+  "piraz_os": {
+    "version": "1.0.0",
+    "description": "Piraz OS Knowledge Base for Code Correction and System Validation",
+    "last_updated": "2024-01-15T10:00:00Z",
+    "boot_sequence": {
+      "stages": [
+        {
+          "stage": "BIOS/UEFI",
+          "order": 1,
+          "description": "Hardware initialization and boot device selection",
+          "common_issues": [
+            "Hardware detection failures",
+            "Boot device not found",
+            "Memory initialization errors"
+          ],
+          "typical_fixes": [
+            "Check hardware connections",
+            "Verify boot order in BIOS",
+            "Test memory modules"
+          ]
+        },
+        {
+          "stage": "Bootloader",
+          "order": 2,
+          "description": "Piraz bootloader loads kernel and initial ramdisk",
+          "files": ["/boot/piraz-loader", "/boot/kernel.img", "/boot/initrd.img"],
+          "common_issues": [
+            "Bootloader corruption",
+            "Missing kernel image",
+            "Initrd loading failure"
+          ],
+          "typical_fixes": [
+            "piraz-install --repair-bootloader",
+            "Rebuild kernel: make kernel-rebuild",
+            "Regenerate initrd: piraz-initrd --rebuild"
+          ]
+        },
+        {
+          "stage": "Kernel Init",
+          "order": 3,
+          "description": "Kernel initialization and device detection",
+          "key_processes": ["init", "kthreadd", "ksoftirqd"],
+          "common_issues": [
+            "Kernel panic on boot",
+            "Device driver failures",
+            "Memory management errors"
+          ],
+          "typical_fixes": [
+            "Boot with safe mode: piraz-safe-boot",
+            "Check dmesg for driver errors",
+            "Verify hardware compatibility"
+          ]
+        },
+        {
+          "stage": "System Services",
+          "order": 4,
+          "description": "Core system services initialization",
+          "services": ["piraz-core", "piraz-network", "piraz-storage", "piraz-security"],
+          "common_issues": [
+            "Service startup failures",
+            "Dependency resolution errors",
+            "Configuration file corruption"
+          ],
+          "typical_fixes": [
+            "piraz-service --repair",
+            "Check service logs: piraz-log --service",
+            "Restore configs: piraz-config --restore"
+          ]
+        }
+      ]
+    },
+    "core_services": {
+      "piraz-core": {
+        "description": "Core system management service",
+        "config_file": "/etc/piraz/core.conf",
+        "log_file": "/var/log/piraz/core.log",
+        "dependencies": [],
+        "commands": {
+          "start": "piraz-service start piraz-core",
+          "stop": "piraz-service stop piraz-core",
+          "status": "piraz-service status piraz-core",
+          "restart": "piraz-service restart piraz-core"
+        },
+        "common_issues": [
+          "Configuration parse errors",
+          "Permission denied on startup",
+          "Resource allocation failures"
+        ],
+        "fixes": [
+          "Validate config: piraz-config --validate /etc/piraz/core.conf",
+          "Fix permissions: piraz-fix --permissions",
+          "Check resources: piraz-resource --check"
+        ]
+      },
+      "piraz-network": {
+        "description": "Network management and configuration service",
+        "config_file": "/etc/piraz/network.conf",
+        "log_file": "/var/log/piraz/network.log",
+        "dependencies": ["piraz-core"],
+        "commands": {
+          "start": "piraz-net start",
+          "stop": "piraz-net stop",
+          "configure": "piraz-net configure --interface",
+          "status": "piraz-net status"
+        },
+        "common_issues": [
+          "Network interface not found",
+          "DHCP configuration failures",
+          "DNS resolution errors"
+        ],
+        "fixes": [
+          "Scan interfaces: piraz-net --scan",
+          "Reset DHCP: piraz-net --dhcp-reset",
+          "Configure DNS: piraz-net --dns-config"
+        ]
+      },
+      "piraz-storage": {
+        "description": "Storage and filesystem management service",
+        "config_file": "/etc/piraz/storage.conf",
+        "log_file": "/var/log/piraz/storage.log",
+        "dependencies": ["piraz-core"],
+        "commands": {
+          "mount": "piraz-storage mount",
+          "unmount": "piraz-storage unmount",
+          "check": "piraz-storage fsck",
+          "repair": "piraz-storage repair"
+        },
+        "common_issues": [
+          "Filesystem corruption",
+          "Mount point errors",
+          "Disk space exhaustion"
+        ],
+        "fixes": [
+          "Run fsck: piraz-storage fsck --auto",
+          "Create mount points: piraz-storage --create-mount",
+          "Clean disk space: piraz-cleanup --aggressive"
+        ]
+      },
+      "piraz-security": {
+        "description": "Security and access control service",
+        "config_file": "/etc/piraz/security.conf",
+        "log_file": "/var/log/piraz/security.log",
+        "dependencies": ["piraz-core"],
+        "commands": {
+          "enable": "piraz-security --enable",
+          "disable": "piraz-security --disable",
+          "policy": "piraz-security --policy",
+          "audit": "piraz-security --audit"
+        },
+        "common_issues": [
+          "Permission denied errors",
+          "Policy configuration errors",
+          "Authentication failures"
+        ],
+        "fixes": [
+          "Reset permissions: piraz-security --reset-perms",
+          "Validate policy: piraz-security --validate-policy",
+          "Check auth config: piraz-security --check-auth"
+        ]
+      }
+    },
+    "error_codes": {
+      "PIRAZ_ERR_001": {
+        "description": "Boot sequence failure",
+        "severity": "critical",
+        "common_causes": [
+          "Corrupted bootloader",
+          "Missing kernel image",
+          "Hardware compatibility issues"
+        ],
+        "recommended_fixes": [
+          "Run piraz-rescue --boot-repair",
+          "Reinstall bootloader: piraz-install --bootloader",
+          "Check hardware compatibility"
+        ],
+        "code_patterns": [
+          "bootloader_init()",
+          "kernel_load()",
+          "hardware_detect()"
+        ]
+      },
+      "PIRAZ_ERR_002": {
+        "description": "Service startup failure",
+        "severity": "high",
+        "common_causes": [
+          "Missing dependencies",
+          "Configuration errors",
+          "Resource constraints"
+        ],
+        "recommended_fixes": [
+          "Check dependencies: piraz-service --check-deps",
+          "Validate config: piraz-config --validate",
+          "Free resources: piraz-cleanup --services"
+        ],
+        "code_patterns": [
+          "service_start()",
+          "dependency_check()",
+          "resource_allocate()"
+        ]
+      },
+      "PIRAZ_ERR_003": {
+        "description": "Network configuration failure",
+        "severity": "medium",
+        "common_causes": [
+          "Invalid network configuration",
+          "Hardware not detected",
+          "Driver issues"
+        ],
+        "recommended_fixes": [
+          "Reset network: piraz-net --reset",
+          "Scan hardware: piraz-net --scan",
+          "Update drivers: piraz-driver --update"
+        ],
+        "code_patterns": [
+          "network_init()",
+          "interface_configure()",
+          "driver_load()"
+        ]
+      },
+      "PIRAZ_ERR_004": {
+        "description": "Filesystem corruption detected",
+        "severity": "high",
+        "common_causes": [
+          "Improper shutdown",
+          "Hardware failures",
+          "Software bugs"
+        ],
+        "recommended_fixes": [
+          "Run filesystem check: piraz-storage fsck --repair",
+          "Restore from backup: piraz-backup --restore",
+          "Check disk health: piraz-storage --health"
+        ],
+        "code_patterns": [
+          "filesystem_check()",
+          "disk_repair()",
+          "backup_restore()"
+        ]
+      },
+      "PIRAZ_ERR_005": {
+        "description": "Memory allocation failure",
+        "severity": "critical",
+        "common_causes": [
+          "Out of memory",
+          "Memory leaks",
+          "Fragmentation"
+        ],
+        "recommended_fixes": [
+          "Free memory: piraz-memory --cleanup",
+          "Restart services: piraz-service --restart-all",
+          "Check memory usage: piraz-memory --analyze"
+        ],
+        "code_patterns": [
+          "malloc()",
+          "memory_allocate()",
+          "free()"
+        ]
+      }
+    },
+    "command_syntax": {
+      "piraz-service": {
+        "description": "Service management utility",
+        "syntax": "piraz-service [action] [service_name] [options]",
+        "actions": ["start", "stop", "restart", "status", "enable", "disable"],
+        "examples": [
+          "piraz-service start piraz-core",
+          "piraz-service status --all",
+          "piraz-service restart piraz-network --force"
+        ],
+        "common_errors": [
+          "Service not found",
+          "Permission denied",
+          "Dependency conflicts"
+        ],
+        "error_fixes": [
+          "Check service list: piraz-service --list",
+          "Run as root: sudo piraz-service",
+          "Resolve dependencies: piraz-service --check-deps"
+        ]
+      },
+      "piraz-config": {
+        "description": "Configuration management utility",
+        "syntax": "piraz-config [action] [config_file] [options]",
+        "actions": ["validate", "edit", "backup", "restore", "reset"],
+        "examples": [
+          "piraz-config validate /etc/piraz/core.conf",
+          "piraz-config backup --all",
+          "piraz-config restore /etc/piraz/network.conf"
+        ],
+        "common_errors": [
+          "Configuration syntax errors",
+          "File not found",
+          "Permission denied"
+        ],
+        "error_fixes": [
+          "Check syntax: piraz-config --check-syntax",
+          "Create default: piraz-config --create-default",
+          "Fix permissions: piraz-config --fix-perms"
+        ]
+      },
+      "piraz-log": {
+        "description": "Log management and analysis utility",
+        "syntax": "piraz-log [action] [options]",
+        "actions": ["view", "search", "clear", "export", "analyze"],
+        "examples": [
+          "piraz-log view --service piraz-core",
+          "piraz-log search --pattern 'ERROR'",
+          "piraz-log analyze --performance"
+        ],
+        "common_errors": [
+          "Log file not found",
+          "Permission denied",
+          "Disk space full"
+        ],
+        "error_fixes": [
+          "Check log location: piraz-log --list",
+          "Run as root: sudo piraz-log",
+          "Clean old logs: piraz-log --cleanup"
+        ]
+      },
+      "piraz-net": {
+        "description": "Network configuration utility",
+        "syntax": "piraz-net [action] [options]",
+        "actions": ["start", "stop", "configure", "scan", "reset"],
+        "examples": [
+          "piraz-net configure --interface eth0 --dhcp",
+          "piraz-net scan --interfaces",
+          "piraz-net reset --all"
+        ],
+        "common_errors": [
+          "Interface not found",
+          "DHCP timeout",
+          "DNS resolution failure"
+        ],
+        "error_fixes": [
+          "List interfaces: piraz-net --list",
+          "Set static IP: piraz-net --static",
+          "Configure DNS: piraz-net --dns 8.8.8.8"
+        ]
+      },
+      "piraz-storage": {
+        "description": "Storage and filesystem utility",
+        "syntax": "piraz-storage [action] [options]",
+        "actions": ["mount", "unmount", "fsck", "repair", "format"],
+        "examples": [
+          "piraz-storage mount /dev/sda1 /mnt",
+          "piraz-storage fsck --auto /dev/sda1",
+          "piraz-storage repair --force /dev/sda1"
+        ],
+        "common_errors": [
+          "Device not found",
+          "Filesystem corruption",
+          "Mount point busy"
+        ],
+        "error_fixes": [
+          "List devices: piraz-storage --list",
+          "Force fsck: piraz-storage fsck --force",
+          "Kill processes: piraz-storage --kill-processes"
+        ]
+      }
+    },
+    "system_behaviors": {
+      "startup_sequence": {
+        "description": "Standard system startup behavior",
+        "steps": [
+          "Hardware initialization",
+          "Bootloader execution",
+          "Kernel loading",
+          "Core service startup",
+          "User service initialization"
+        ],
+        "expected_timing": {
+          "hardware_init": "0-5 seconds",
+          "bootloader": "5-10 seconds",
+          "kernel_load": "10-20 seconds",
+          "core_services": "20-30 seconds",
+          "user_services": "30-45 seconds"
+        },
+        "failure_points": [
+          "Hardware detection",
+          "Bootloader corruption",
+          "Kernel panic",
+          "Service dependencies",
+          "Configuration errors"
+        ]
+      },
+      "service_lifecycle": {
+        "description": "Service startup and shutdown behavior",
+        "states": ["stopped", "starting", "running", "stopping", "failed"],
+        "transitions": {
+          "stopped -> starting": "Service start command issued",
+          "starting -> running": "Service initialization complete",
+          "running -> stopping": "Service stop command issued",
+          "stopping -> stopped": "Service shutdown complete",
+          "* -> failed": "Service error occurred"
+        },
+        "recovery_actions": {
+          "failed -> stopped": "piraz-service reset [service]",
+          "failed -> starting": "piraz-service restart [service]"
+        }
+      },
+      "error_handling": {
+        "description": "System error handling and recovery",
+        "levels": ["info", "warning", "error", "critical", "fatal"],
+        "responses": {
+          "info": "Log and continue",
+          "warning": "Log and alert",
+          "error": "Log, alert, and attempt recovery",
+          "critical": "Log, alert, recovery, and failsafe",
+          "fatal": "Log, alert, and system halt"
+        },
+        "recovery_strategies": [
+          "Automatic retry",
+          "Service restart",
+          "Fallback configuration",
+          "Safe mode boot",
+          "System restore"
+        ]
+      }
+    },
+    "code_validation_rules": {
+      "service_management": {
+        "required_patterns": [
+          "Error checking after service operations",
+          "Proper resource cleanup",
+          "Dependency validation",
+          "Configuration validation"
+        ],
+        "anti_patterns": [
+          "Starting services without checking dependencies",
+          "Ignoring service status checks",
+          "Missing error handling",
+          "Hardcoded paths"
+        ],
+        "best_practices": [
+          "Always check service status before operations",
+          "Use proper error codes and messages",
+          "Implement timeout mechanisms",
+          "Log all service operations"
+        ]
+      },
+      "configuration_management": {
+        "required_patterns": [
+          "Configuration validation before use",
+          "Backup before modification",
+          "Atomic configuration updates",
+          "Default value handling"
+        ],
+        "anti_patterns": [
+          "Direct configuration file modification",
+          "Missing validation",
+          "Ignoring backup procedures",
+          "Hardcoded configuration values"
+        ],
+        "best_practices": [
+          "Use configuration management utilities",
+          "Always validate configuration syntax",
+          "Implement rollback mechanisms",
+          "Use environment-specific configurations"
+        ]
+      },
+      "error_handling": {
+        "required_patterns": [
+          "Comprehensive error checking",
+          "Proper error propagation",
+          "User-friendly error messages",
+          "Error logging and monitoring"
+        ],
+        "anti_patterns": [
+          "Ignoring function return values",
+          "Generic error messages",
+          "Silent failures",
+          "Improper exception handling"
+        ],
+        "best_practices": [
+          "Use specific error codes",
+          "Implement retry mechanisms",
+          "Provide recovery suggestions",
+          "Log errors with context"
+        ]
+      }
+    },
+    "learning_feedback": {
+      "correction_types": [
+        "syntax_error",
+        "logic_error",
+        "performance_issue",
+        "security_vulnerability",
+        "compatibility_issue"
+      ],
+      "confidence_levels": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "improvement_areas": [
+        "error_handling",
+        "resource_management",
+        "configuration_validation",
+        "service_lifecycle",
+        "security_practices"
+      ]
+    }
+  }
+} 

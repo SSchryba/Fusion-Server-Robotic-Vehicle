@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusion-Hybrid-V1 Control UI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0ea5e9',
+                        secondary: '#3b82f6',
+                        accent: '#8b5cf6',
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        error: '#ef4444'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .chat-message {
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .pulse-ring {
+            animation: pulse-ring 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.1); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg px-6 py-4 shadow-2xl">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
+                    <i class="fas fa-brain text-2xl text-purple-600"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold">Fusion-Hybrid-V1 Control UI</h1>
+                    <p class="text-blue-100 text-sm">Advanced AI Model Management & System Control</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="glass rounded-lg px-4 py-2">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-green-400 rounded-full pulse-ring"></div>
+                        <span class="text-sm font-medium" id="connection-status">Connected</span>
+                    </div>
+                </div>
+                <div class="glass rounded-lg px-4 py-2">
+                    <span class="text-sm" id="current-time"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Grid -->
+    <main class="container mx-auto px-6 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Panel 1: Model Status Panel -->
+            <div class="bg-gray-800 rounded-2xl shadow-2xl p-6 border border-gray-700">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-cogs text-primary mr-3"></i>
+                        Model Configuration
+                    </h2>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-green-400 rounded-full" id="fusion-status-indicator"></div>
+                        <span class="text-sm text-gray-400" id="fusion-status-text">Active</span>
+                    </div>
+                </div>
+                
+                <!-- Model Weight Controls -->
+                <div class="space-y-6" id="model-controls">
+                    <!-- Models will be populated dynamically -->
+                </div>
+                
+                <!-- Fusion Strategy -->
+                <div class="mt-6">
+                    <label class="block text-sm font-medium mb-2">Fusion Strategy</label>
+                    <select id="fusion-strategy" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="weighted_average">Weighted Average</option>
+                        <option value="ensemble_voting">Ensemble Voting</option>
+                        <option value="dynamic_routing">Dynamic Routing</option>
+                    </select>
+                </div>
+                
+                <!-- Apply Changes Button -->
+                <button id="apply-changes-btn" class="w-full mt-6 bg-primary hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                    <i class="fas fa-save mr-2"></i>
+                    Apply Configuration Changes
+                </button>
+                
+                <!-- Configuration Info -->
+                <div class="mt-4 text-sm text-gray-400" id="config-info">
+                    Total Weight: <span id="total-weight">0.0</span> | 
+                    Last Updated: <span id="last-updated">Never</span>
+                </div>
+            </div>
+
+            <!-- Panel 2: Agent Chat Window -->
+            <div class="bg-gray-800 rounded-2xl shadow-2xl p-6 border border-gray-700">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-comments text-accent mr-3"></i>
+                        Agent Chat Interface
+                    </h2>
+                    <div class="flex items-center space-x-2">
+                        <select id="chat-model" class="bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm">
+                            <option value="fusion-hybrid-v1">Fusion-Hybrid-V1</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Chat Messages Container -->
+                <div class="h-80 bg-gray-900 rounded-lg border border-gray-600 p-4 overflow-y-auto mb-4" id="chat-messages">
+                    <div class="text-center text-gray-500 text-sm">
+                        💬 Start a conversation with your Fusion-Hybrid-V1 agent
+                    </div>
+                </div>
+                
+                <!-- Chat Input -->
+                <div class="flex space-x-2">
+                    <input type="text" id="chat-input" placeholder="Type your message..." 
+                           class="flex-1 bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-accent focus:border-transparent" />
+                    <button id="send-chat-btn" class="bg-accent hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors duration-200">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                
+                <!-- Chat Status -->
+                <div class="mt-2 text-sm text-gray-400" id="chat-status">
+                    Ready to chat • Processing time: <span id="last-response-time">--</span>ms
+                </div>
+            </div>
+
+            <!-- Panel 3: System Health Panel -->
+            <div class="bg-gray-800 rounded-2xl shadow-2xl p-6 border border-gray-700">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-heartbeat text-success mr-3"></i>
+                        System Health Monitor
+                    </h2>
+                    <button id="refresh-health-btn" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                
+                <!-- System Metrics -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-gray-900 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-400">CPU Usage</span>
+                            <i class="fas fa-microchip text-warning"></i>
+                        </div>
+                        <div class="mt-2">
+                            <span class="text-2xl font-bold" id="cpu-usage">--</span>
+                            <span class="text-sm text-gray-400">%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                            <div class="bg-warning h-2 rounded-full transition-all duration-300" id="cpu-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-400">Memory Usage</span>
+                            <i class="fas fa-memory text-primary"></i>
+                        </div>
+                        <div class="mt-2">
+                            <span class="text-2xl font-bold" id="memory-usage">--</span>
+                            <span class="text-sm text-gray-400">%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                            <div class="bg-primary h-2 rounded-full transition-all duration-300" id="memory-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI Services Status -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-3">AI Services Status</h3>
+                    <div class="space-y-2" id="ai-services">
+                        <!-- Services will be populated dynamically -->
+                    </div>
+                </div>
+                
+                <!-- System Info -->
+                <div class="text-sm text-gray-400">
+                    <div class="flex justify-between">
+                        <span>Processes:</span>
+                        <span id="process-count">--</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Uptime:</span>
+                        <span id="system-uptime">--</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Last Update:</span>
+                        <span id="last-health-update">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 4: Admin Tools Panel -->
+            <div class="bg-gray-800 rounded-2xl shadow-2xl p-6 border border-gray-700">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-tools text-error mr-3"></i>
+                        Administrative Tools
+                    </h2>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs bg-red-600 px-2 py-1 rounded">ADMIN</span>
+                    </div>
+                </div>
+                
+                <!-- Admin Action Buttons -->
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <button id="safe-scan-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                        <i class="fas fa-search mr-2"></i>
+                        Safe Process Scan
+                    </button>
+                    <button id="view-logs-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                        <i class="fas fa-file-alt mr-2"></i>
+                        View Admin Logs
+                    </button>
+                    <button id="system-info-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        System Information
+                    </button>
+                    <button id="export-config-btn" class="bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                        <i class="fas fa-download mr-2"></i>
+                        Export Config
+                    </button>
+                </div>
+                
+                <!-- Admin Output Area -->
+                <div class="bg-gray-900 rounded-lg border border-gray-600 p-4 h-64 overflow-y-auto" id="admin-output">
+                    <div class="text-center text-gray-500 text-sm">
+                        🔧 Admin tool output will appear here
+                    </div>
+                </div>
+                
+                <!-- Admin Status -->
+                <div class="mt-4 flex justify-between items-center text-sm text-gray-400">
+                    <span>Actions Logged: <span id="admin-actions-count">0</span></span>
+                    <span>Session: <span id="admin-session-id">active</span></span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-800 rounded-lg p-6 max-w-md w-mx-4">
+            <h3 class="text-lg font-bold mb-4">⚠️ Confirm Action</h3>
+            <p id="confirmation-message" class="text-gray-300 mb-6"></p>
+            <div class="flex space-x-3">
+                <button id="confirm-yes" class="flex-1 bg-error hover:bg-red-600 text-white py-2 px-4 rounded-lg">
+                    Yes, Proceed
+                </button>
+                <button id="confirm-no" class="flex-1 bg-gray-600 hover:bg-gray-500 text-white py-2 px-4 rounded-lg">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Global state
+        let fusionConfig = null;
+        let websocket = null;
+        let adminActionCount = 0;
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDashboard();
+            setupEventListeners();
+            connectWebSocket();
+            updateCurrentTime();
+            setInterval(updateCurrentTime, 1000);
+        });
+
+        function initializeDashboard() {
+            loadFusionStatus();
+            loadSystemHealth();
+            setupAutoRefresh();
+        }
+
+        function setupEventListeners() {
+            // Model configuration
+            document.getElementById('apply-changes-btn').addEventListener('click', applyConfigurationChanges);
+            
+            // Chat interface
+            document.getElementById('send-chat-btn').addEventListener('click', sendChatMessage);
+            document.getElementById('chat-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') sendChatMessage();
+            });
+            
+            // System health
+            document.getElementById('refresh-health-btn').addEventListener('click', loadSystemHealth);
+            
+            // Admin tools
+            document.getElementById('safe-scan-btn').addEventListener('click', () => executeAdminAction('safe_scan'));
+            document.getElementById('view-logs-btn').addEventListener('click', viewAdminLogs);
+            document.getElementById('system-info-btn').addEventListener('click', () => executeAdminAction('system_info'));
+            document.getElementById('export-config-btn').addEventListener('click', exportConfiguration);
+            
+            // Confirmation modal
+            document.getElementById('confirm-yes').addEventListener('click', confirmAction);
+            document.getElementById('confirm-no').addEventListener('click', cancelAction);
+        }
+
+        function updateCurrentTime() {
+            document.getElementById('current-time').textContent = new Date().toLocaleTimeString();
+        }
+
+        function connectWebSocket() {
+            try {
+                websocket = new WebSocket('ws://localhost:9000/ws');
+                
+                websocket.onopen = function() {
+                    document.getElementById('connection-status').textContent = 'Connected';
+                    document.getElementById('connection-status').parentElement.querySelector('.pulse-ring').classList.add('bg-green-400');
+                };
+                
+                websocket.onmessage = function(event) {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'system_metrics') {
+                        updateSystemMetrics(data.data);
+                    }
+                };
+                
+                websocket.onclose = function() {
+                    document.getElementById('connection-status').textContent = 'Disconnected';
+                    document.getElementById('connection-status').parentElement.querySelector('.pulse-ring').classList.remove('bg-green-400');
+                    // Attempt to reconnect after 5 seconds
+                    setTimeout(connectWebSocket, 5000);
+                };
+            } catch (error) {
+                console.error('WebSocket connection failed:', error);
+            }
+        }
+
+        async function loadFusionStatus() {
+            try {
+                const response = await fetch('/fusion/status');
+                const result = await response.json();
+                
+                if (result.success) {
+                    fusionConfig = result.data.configuration;
+                    displayFusionModels(result.data);
+                    updateConfigInfo(result.data);
+                }
+            } catch (error) {
+                console.error('Failed to load fusion status:', error);
+                showError('Failed to load fusion configuration');
+            }
+        }
+
+        function displayFusionModels(data) {
+            const container = document.getElementById('model-controls');
+            container.innerHTML = '';
+            
+            const models = data.configuration.ensemble_config.models;
+            
+            models.forEach(model => {
+                const modelDiv = document.createElement('div');
+                modelDiv.className = 'bg-gray-900 rounded-lg p-4';
+                
+                modelDiv.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-medium">${model.name}</span>
+                        <span class="text-sm text-gray-400">${model.domain}</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <input type="range" min="0" max="3" step="0.1" value="${model.weight}" 
+                               class="flex-1 slider" data-model="${model.name}" data-domain="${model.domain}">
+                        <span class="text-sm font-mono w-12 text-right weight-display">${model.weight}</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                        <div class="bg-primary h-2 rounded-full transition-all duration-300" 
+                             style="width: ${(model.normalized_weight * 100).toFixed(1)}%"></div>
+                    </div>
+                    <div class="text-xs text-gray-400 mt-1">
+                        ${(model.normalized_weight * 100).toFixed(1)}% of ensemble
+                    </div>
+                `;
+                
+                container.appendChild(modelDiv);
+                
+                // Add event listener for slider
+                const slider = modelDiv.querySelector('.slider');
+                const weightDisplay = modelDiv.querySelector('.weight-display');
+                
+                slider.addEventListener('input', function() {
+                    weightDisplay.textContent = this.value;
+                    updateTotalWeight();
+                });
+            });
+            
+            // Set fusion strategy
+            document.getElementById('fusion-strategy').value = data.configuration.ensemble_config.fusion_strategy;
+        }
+
+        function updateTotalWeight() {
+            const sliders = document.querySelectorAll('.slider');
+            let total = 0;
+            
+            sliders.forEach(slider => {
+                total += parseFloat(slider.value);
+            });
+            
+            document.getElementById('total-weight').textContent = total.toFixed(1);
+            
+            // Update normalized weights display
+            sliders.forEach(slider => {
+                const normalized = parseFloat(slider.value) / total;
+                const container = slider.closest('.bg-gray-900');
+                const bar = container.querySelector('.bg-primary');
+                const percentage = container.querySelector('.text-xs');
+                
+                bar.style.width = `${(normalized * 100).toFixed(1)}%`;
+                percentage.textContent = `${(normalized * 100).toFixed(1)}% of ensemble`;
+            });
+        }
+
+        function updateConfigInfo(data) {
+            document.getElementById('total-weight').textContent = data.total_weight.toFixed(1);
+            document.getElementById('last-updated').textContent = 
+                data.configuration.last_updated ? 
+                new Date(data.configuration.last_updated).toLocaleString() : 
+                'Never';
+        }
+
+        async function applyConfigurationChanges() {
+            const confirmed = await confirmActionModal('Apply configuration changes to Fusion-Hybrid-V1 model?');
+            if (!confirmed) return;
+
+            try {
+                const sliders = document.querySelectorAll('.slider');
+                const models = [];
+                
+                sliders.forEach(slider => {
+                    models.push({
+                        model_name: slider.dataset.model,
+                        weight: parseFloat(slider.value),
+                        domain: slider.dataset.domain
+                    });
+                });
+                
+                const fusionStrategy = document.getElementById('fusion-strategy').value;
+                
+                const response = await fetch('/fusion/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        models: models,
+                        fusion_strategy: fusionStrategy,
+                        requester: 'dashboard_user'
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showSuccess('Configuration updated successfully!');
+                    loadFusionStatus(); // Reload to reflect changes
+                } else {
+                    showError('Failed to update configuration: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Configuration update failed:', error);
+                showError('Failed to update configuration');
+            }
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message to chat
+            addChatMessage('user', message);
+            input.value = '';
+            
+            // Show typing indicator
+            const typingId = addChatMessage('assistant', '🤔 Thinking...');
+            
+            try {
+                const startTime = Date.now();
+                const response = await fetch('/agent/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: message,
+                        model: document.getElementById('chat-model').value,
+                        requester: 'dashboard_user'
+                    })
+                });
+                
+                const result = await response.json();
+                const processingTime = Date.now() - startTime;
+                
+                // Remove typing indicator
+                document.getElementById(typingId).remove();
+                
+                if (result.success) {
+                    addChatMessage('assistant', result.data.response);
+                    document.getElementById('last-response-time').textContent = processingTime;
+                } else {
+                    addChatMessage('assistant', '❌ Error: ' + result.error);
+                }
+            } catch (error) {
+                document.getElementById(typingId).remove();
+                addChatMessage('assistant', '❌ Failed to send message: ' + error.message);
+            }
+        }
+
+        function addChatMessage(role, content) {
+            const container = document.getElementById('chat-messages');
+            const messageId = 'msg_' + Date.now();
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.id = messageId;
+            messageDiv.className = `chat-message mb-4 ${role === 'user' ? 'ml-8' : 'mr-8'}`;
+            
+            const isUser = role === 'user';
+            messageDiv.innerHTML = `
+                <div class="flex ${isUser ? 'justify-end' : 'justify-start'}">
+                    <div class="max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                        isUser ? 'bg-primary text-white' : 'bg-gray-700 text-gray-100'
+                    }">
+                        <div class="text-xs text-gray-300 mb-1">
+                            ${isUser ? 'You' : 'Fusion-Hybrid-V1'}
+                        </div>
+                        <div class="whitespace-pre-wrap">${content}</div>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+            
+            return messageId;
+        }
+
+        async function loadSystemHealth() {
+            try {
+                const response = await fetch('/system/monitor');
+                const result = await response.json();
+                
+                if (result.success) {
+                    updateSystemMetrics(result.data);
+                }
+            } catch (error) {
+                console.error('Failed to load system health:', error);
+            }
+        }
+
+        function updateSystemMetrics(data) {
+            // Update CPU and Memory
+            const cpuPercent = data.cpu.usage_percent.toFixed(1);
+            const memoryPercent = data.memory.virtual.percent.toFixed(1);
+            
+            document.getElementById('cpu-usage').textContent = cpuPercent;
+            document.getElementById('memory-usage').textContent = memoryPercent;
+            document.getElementById('cpu-bar').style.width = cpuPercent + '%';
+            document.getElementById('memory-bar').style.width = memoryPercent + '%';
+            
+            // Update process count and uptime
+            document.getElementById('process-count').textContent = data.processes.total_count;
+            document.getElementById('system-uptime').textContent = formatUptime(data.system_info.uptime_seconds);
+            document.getElementById('last-health-update').textContent = new Date().toLocaleTimeString();
+            
+            // Update AI services
+            updateAIServices(data.ai_services);
+        }
+
+        function updateAIServices(services) {
+            const container = document.getElementById('ai-services');
+            container.innerHTML = '';
+            
+            Object.entries(services).forEach(([service, info]) => {
+                const serviceDiv = document.createElement('div');
+                serviceDiv.className = 'flex items-center justify-between py-2 px-3 bg-gray-900 rounded';
+                
+                const isRunning = info.status === 'running';
+                serviceDiv.innerHTML = `
+                    <span class="text-sm">${service.replace('_', ' ').toUpperCase()}</span>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 rounded-full ${isRunning ? 'bg-green-400' : 'bg-gray-400'}"></div>
+                        <span class="text-xs text-gray-400">${info.status}</span>
+                    </div>
+                `;
+                
+                container.appendChild(serviceDiv);
+            });
+        }
+
+        function formatUptime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            return `${hours}h ${minutes}m`;
+        }
+
+        async function executeAdminAction(action) {
+            const confirmed = await confirmActionModal(`Execute admin action: ${action}?`);
+            if (!confirmed) return;
+
+            try {
+                adminActionCount++;
+                document.getElementById('admin-actions-count').textContent = adminActionCount;
+                
+                const response = await fetch('/admin/action', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: action,
+                        requester: 'dashboard_user',
+                        metadata: { timestamp: new Date().toISOString() }
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayAdminOutput(`✅ ${action} completed successfully`, result.data);
+                } else {
+                    displayAdminOutput(`❌ ${action} failed: ${result.error}`);
+                }
+            } catch (error) {
+                displayAdminOutput(`❌ Admin action failed: ${error.message}`);
+            }
+        }
+
+        async function viewAdminLogs() {
+            try {
+                const response = await fetch('/system/logs');
+                const result = await response.json();
+                
+                if (result.success) {
+                    const logs = result.data;
+                    let output = `📋 Admin Logs Summary\n`;
+                    output += `Total Commands: ${logs.total_commands}\n`;
+                    output += `Total Events: ${logs.total_events}\n\n`;
+                    
+                    if (logs.command_history.length > 0) {
+                        output += `Recent Commands:\n`;
+                        logs.command_history.slice(-5).forEach(cmd => {
+                            output += `• ${cmd.timestamp}: ${cmd.command || cmd.action}\n`;
+                        });
+                    }
+                    
+                    displayAdminOutput(output);
+                } else {
+                    displayAdminOutput(`❌ Failed to load logs: ${result.error}`);
+                }
+            } catch (error) {
+                displayAdminOutput(`❌ Failed to load logs: ${error.message}`);
+            }
+        }
+
+        function exportConfiguration() {
+            if (fusionConfig) {
+                const dataStr = JSON.stringify(fusionConfig, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'fusion-hybrid-v1-config.json';
+                link.click();
+                
+                displayAdminOutput('✅ Configuration exported successfully');
+            } else {
+                displayAdminOutput('❌ No configuration loaded to export');
+            }
+        }
+
+        function displayAdminOutput(text, data = null) {
+            const container = document.getElementById('admin-output');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            const outputDiv = document.createElement('div');
+            outputDiv.className = 'mb-2 text-sm border-l-2 border-primary pl-3';
+            outputDiv.innerHTML = `
+                <div class="text-gray-400 text-xs">[${timestamp}]</div>
+                <div class="text-gray-100">${text}</div>
+                ${data ? `<div class="text-gray-400 text-xs mt-1">Data: ${JSON.stringify(data).substring(0, 100)}...</div>` : ''}
+            `;
+            
+            container.appendChild(outputDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function setupAutoRefresh() {
+            // Refresh system health every 30 seconds
+            setInterval(loadSystemHealth, 30000);
+            
+            // Refresh fusion status every 2 minutes
+            setInterval(loadFusionStatus, 120000);
+        }
+
+        // Utility functions
+        function confirmActionModal(message) {
+            return new Promise((resolve) => {
+                document.getElementById('confirmation-message').textContent = message;
+                document.getElementById('confirmation-modal').classList.remove('hidden');
+                
+                window.confirmResolve = resolve;
+            });
+        }
+
+        function confirmAction() {
+            document.getElementById('confirmation-modal').classList.add('hidden');
+            if (window.confirmResolve) window.confirmResolve(true);
+        }
+
+        function cancelAction() {
+            document.getElementById('confirmation-modal').classList.add('hidden');
+            if (window.confirmResolve) window.confirmResolve(false);
+        }
+
+        function showSuccess(message) {
+            // Simple toast notification
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-4 right-4 bg-success text-white px-4 py-2 rounded-lg shadow-lg z-50';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        function showError(message) {
+            // Simple toast notification
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-4 right-4 bg-error text-white px-4 py-2 rounded-lg shadow-lg z-50';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

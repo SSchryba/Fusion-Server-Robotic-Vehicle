@@ -1,0 +1,66 @@
+# Fusion System Configuration
+fusion_server:
+  host: "localhost"
+  port: 8000
+  timeout: 30
+
+# Model Constraints
+model_constraints:
+  max_parameter_size: "13B"  # Maximum parameters per model
+  min_capability_threshold: 7.5  # Minimum capability score (0-10)
+  max_hallucination_rate: 0.20  # Maximum hallucination rate (0-1)
+  
+# Capability Requirements
+capability_requirements:
+  deep_reasoning: 7.5
+  code_generation: 7.0
+  math: 6.5
+  following_instructions: 8.0
+  general: 6.0
+
+# Model Evaluation Criteria
+evaluation_criteria:
+  performance_weight: 0.4
+  capability_weight: 0.3
+  efficiency_weight: 0.2
+  reliability_weight: 0.1
+
+# Fusion Control Settings
+fusion_control:
+  cycle_interval_hours: 56
+  models_per_fusion: 3
+  max_concurrent_fusions: 2
+  backup_interval_hours: 12
+
+# Monitor Settings
+monitor:
+  refresh_interval: 5  # seconds
+  display_history: 10
+  log_level: "INFO"
+
+# Chat Interface
+chat:
+  default_model: "hybrid-fusion-v1"
+  max_message_length: 4096
+  response_timeout: 60
+  enable_history: true
+  max_history_size: 100
+
+# Model Disqualification Rules
+disqualification_rules:
+  - condition: "hallucination_rate > 0.25"
+    action: "remove"
+  - condition: "response_time > 30"
+    action: "deprioritize"
+  - condition: "capability_score < 6.0"
+    action: "remove"
+  - condition: "error_rate > 0.15"
+    action: "remove"
+
+# Priority Models (will be preferred in fusion)
+priority_models:
+  - "deepseek-coder:latest"
+  - "deepseek-math:latest"
+  - "deepseek-v2:latest"
+  - "mistral:latest"
+  - "codellama:latest" 

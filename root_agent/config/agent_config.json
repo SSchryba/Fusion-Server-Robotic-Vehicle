@@ -1,0 +1,23 @@
+{
+  "max_operations_per_minute": 100,
+  "enable_filesystem_access": true,
+  "enable_command_execution": true,
+  "log_level": "INFO",
+  "protected_paths": [
+    "/etc/passwd",
+    "/etc/shadow",
+    "/etc/sudoers",
+    "C:\\Windows\\System32\\config\\SAM"
+  ],
+  "dangerous_commands": [
+    "rm -rf /",
+    "format",
+    "del /f /s /q C:\\",
+    "mkfs"
+  ],
+  "admin_required_operations": [
+    "system_configuration",
+    "service_management",
+    "user_management"
+  ]
+}

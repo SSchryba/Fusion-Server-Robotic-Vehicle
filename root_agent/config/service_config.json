@@ -1,0 +1,8 @@
+{
+  "service_name": "ai_root_agent",
+  "description": "Autonomous AI Root Agent Service",
+  "auto_start": false,
+  "restart_policy": "on-failure",
+  "working_directory": "C:\\Users\\sschr\\Desktop\\server\\root_agent",
+  "log_file": "logs/service.log"
+}

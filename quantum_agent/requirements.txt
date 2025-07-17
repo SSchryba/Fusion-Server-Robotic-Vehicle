@@ -1,0 +1,50 @@
+# Quantum Agent Framework Dependencies
+
+# Quantum Computing Libraries
+qiskit>=0.45.0
+qiskit-ibm-runtime>=0.17.0
+qiskit-ibm-provider>=0.7.0
+cirq>=1.3.0
+pennylane>=0.33.0
+dwave-ocean-sdk>=6.9.0
+dwave-system>=1.20.0
+
+# Supercomputing and HPC
+paramiko>=3.3.0
+fabric>=3.2.0
+scp>=0.14.0
+
+# Web Scraping and Documentation
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+scrapy>=2.11.0
+selenium>=4.15.0
+
+# Vector Database and Embeddings
+faiss-cpu>=1.7.4
+sentence-transformers>=2.2.2
+chromadb>=0.4.0
+
+# Scientific Computing
+numpy>=1.24.0
+scipy>=1.11.0
+matplotlib>=3.7.0
+pandas>=2.1.0
+
+# Async and Networking
+aiohttp>=3.9.0
+asyncio-mqtt>=0.16.0
+asyncssh>=2.14.0
+
+# Configuration and Security
+python-dotenv>=1.0.0
+cryptography>=41.0.0
+pyyaml>=6.0
+
+# Logging and Monitoring
+structlog>=23.2.0
+rich>=13.7.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0 

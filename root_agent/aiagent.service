@@ -1,0 +1,40 @@
+[Unit]
+Description=Root-Level Autonomous AI Agent
+Documentation=https://github.com/user/root-agent
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/root_agent
+ExecStart=/usr/bin/python3 /opt/root_agent/agent.py
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill -TERM $MAINPID
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=aiagent
+
+# Security settings
+NoNewPrivileges=false
+PrivateTmp=false
+ProtectSystem=false
+ProtectHome=false
+ReadWritePaths=/var/log /opt/root_agent /tmp
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=4096
+MemoryMax=1G
+CPUQuota=50%
+
+# Environment
+Environment=PYTHONPATH=/opt/root_agent
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
+Alias=root-agent.service 

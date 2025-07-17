@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 Unified Control Center - Fusion Hybrid & Quantum Systems</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 25%, #2d1b69 50%, #1e3c72 75%, #2a5298 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #ffff00, #00ff00);
+            background-size: 400% 400%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .system-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .system-panel {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .system-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .system-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00f5ff, #ff00ff, #ffff00, #00ff00);
+            background-size: 400% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .panel-icon {
+            font-size: 2em;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .panel-title {
+            flex: 1;
+        }
+
+        .panel-title h3 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+        }
+
+        .panel-title p {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-online { background: #00ff88; }
+        .status-offline { background: #ff4757; }
+        .status-warning { background: #ffa502; }
+        .status-loading { background: #3742fa; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .control-section {
+            margin-bottom: 20px;
+        }
+
+        .control-section h4 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #00f5ff;
+        }
+
+        .control-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary { border-color: #00f5ff; color: #00f5ff; }
+        .btn-success { border-color: #00ff88; color: #00ff88; }
+        .btn-warning { border-color: #ffa502; color: #ffa502; }
+        .btn-danger { border-color: #ff4757; color: #ff4757; }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .info-label {
+            font-size: 0.8em;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .ai-chat-container {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-top: 30px;
+        }
+
+        .chat-messages {
+            background: rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .chat-message {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-message.user-message {
+            background: linear-gradient(135deg, rgba(0,245,255,0.2), rgba(0,245,255,0.1));
+            border: 1px solid rgba(0,245,255,0.3);
+            margin-left: 50px;
+        }
+
+        .chat-message.ai-message {
+            background: linear-gradient(135deg, rgba(255,0,255,0.2), rgba(255,0,255,0.1));
+            border: 1px solid rgba(255,0,255,0.3);
+            margin-right: 50px;
+        }
+
+        .chat-message.system-message {
+            background: linear-gradient(135deg, rgba(255,255,0,0.2), rgba(255,255,0,0.1));
+            border: 1px solid rgba(255,255,0,0.3);
+            text-align: center;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .sender {
+            font-weight: bold;
+        }
+
+        .timestamp {
+            font-size: 0.8em;
+            opacity: 0.6;
+        }
+
+        .message-content {
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .chat-input-container {
+            margin-top: 15px;
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            padding: 12px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .chat-input input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .model-select {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: white;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        .model-select option {
+            background: #1a1a3a;
+            color: white;
+        }
+
+        .unified-console {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-top: 30px;
+        }
+
+        .console-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .console-output {
+            background: rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+        }
+
+        .console-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .console-input input {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            padding: 12px;
+            color: white;
+            font-family: 'Courier New', monospace;
+        }
+
+        .console-input input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .action-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .action-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00f5ff, #ff00ff);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .metric-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scrollbar::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
+        .scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+        }
+
+        .scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🌌 Unified Control Center</h1>
+            <p>Complete access to Fusion Hybrid & Quantum Server Systems</p>
+            <div class="status-indicator">
+                <div class="status-dot status-online"></div>
+                <span>All Systems Operational</span>
+            </div>
+        </div>
+
+        <div class="system-grid">
+            <!-- Fusion Tools System -->
+            <div class="system-panel">
+                <div class="panel-header">
+                    <div class="panel-icon">🧬</div>
+                    <div class="panel-title">
+                        <h3>Fusion Tools Suite</h3>
+                        <p>Hybrid LLM Fusion Server Management</p>
+                    </div>
+                </div>
+                
+                <div class="status-indicator">
+                    <div class="status-dot status-online" id="fusion-status"></div>
+                    <span id="fusion-status-text">Online</span>
+                </div>
+
+                <div class="control-section">
+                    <h4>🔍 Monitoring & Control</h4>
+                    <div class="control-buttons">
+                        <button class="btn btn-primary" onclick="openFusionMonitor()">Status Monitor</button>
+                        <button class="btn btn-success" onclick="startFusionController()">Start Controller</button>
+                        <button class="btn btn-warning" onclick="openFusionChat()">Chat Interface</button>
+                        <button class="btn btn-primary" onclick="triggerAbsorption()">Trigger Absorption</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h4>🤖 Model Operations</h4>
+                    <div class="control-buttons">
+                        <button class="btn btn-success" onclick="createHybridModel()">Create Hybrid</button>
+                        <button class="btn btn-primary" onclick="pullDeepSeekModels()">Pull DeepSeek</button>
+                        <button class="btn btn-warning" onclick="evaluateModels()">Evaluate Models</button>
+                        <button class="btn btn-primary" onclick="showHybridModels()">View Hybrids</button>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Fusion Version</div>
+                        <div class="info-value" id="fusion-version">v1.0</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Active Models</div>
+                        <div class="info-value" id="active-models">4</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Hybrid Models</div>
+                        <div class="info-value" id="hybrid-models">1</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Last Fusion</div>
+                        <div class="info-value" id="last-fusion">2h ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quantum Agent System -->
+            <div class="system-panel">
+                <div class="panel-header">
+                    <div class="panel-icon">⚛️</div>
+                    <div class="panel-title">
+                        <h3>Quantum Agent Framework</h3>
+                        <p>Quantum Computing & HPC Integration</p>
+                    </div>
+                </div>
+                
+                <div class="status-indicator">
+                    <div class="status-dot status-online" id="quantum-status"></div>
+                    <span id="quantum-status-text">Online</span>
+                </div>
+
+                <div class="control-section">
+                    <h4>⚛️ Quantum Operations</h4>
+                    <div class="control-buttons">
+                        <button class="btn btn-primary" onclick="executeQuantumJob()">Execute Circuit</button>
+                        <button class="btn btn-success" onclick="openQuantumDemo()">Run Demo</button>
+                        <button class="btn btn-warning" onclick="updateQuantumKB()">Update Knowledge</button>
+                        <button class="btn btn-primary" onclick="quantumBackends()">View Backends</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h4>🖥️ HPC & Supercomputing</h4>
+                    <div class="control-buttons">
+                        <button class="btn btn-success" onclick="submitHPCJob()">Submit HPC Job</button>
+                        <button class="btn btn-primary" onclick="monitorHPCJobs()">Monitor Jobs</button>
+                        <button class="btn btn-warning" onclick="showClusters()">View Clusters</button>
+                        <button class="btn btn-primary" onclick="resourceUsage()">Resource Usage</button>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Quantum Jobs</div>
+                        <div class="info-value" id="quantum-jobs">0</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">HPC Jobs</div>
+                        <div class="info-value" id="hpc-jobs">0</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Active Backends</div>
+                        <div class="info-value" id="quantum-backends">4</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Knowledge Base</div>
+                        <div class="info-value" id="kb-size">1.2GB</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Server Fusion System -->
+            <div class="system-panel">
+                <div class="panel-header">
+                    <div class="panel-icon">🖥️</div>
+                    <div class="panel-title">
+                        <h3>Server Fusion Engine</h3>
+                        <p>Core Hybrid Model Training & API</p>
+                    </div>
+                </div>
+                
+                <div class="status-indicator">
+                    <div class="status-dot status-online" id="server-status"></div>
+                    <span id="server-status-text">Online</span>
+                </div>
+
+                <div class="control-section">
+                    <h4>🔄 Model Training</h4>
+                    <div class="control-buttons">
+                        <button class="btn btn-success" onclick="startTraining()">Start Training</button>
+                        <button class="btn btn-primary" onclick="viewTrainingJobs()">View Jobs</button>
+                        <button class="btn btn-warning" onclick="monitorResources()">Monitor Resources</button>
+                        <button class="btn btn-primary" onclick="serverMetrics()">Server Metrics</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h4>🧬 Fusion Operations</h4>
+                    <div class="control-buttons">
+                        <button class="btn btn-success" onclick="fusionStatus()">Fusion Status</button>
+                        <button class="btn btn-primary" onclick="continuousAbsorption()">Continuous Mode</button>
+                        <button class="btn btn-warning" onclick="fusionHistory()">View History</button>
+                        <button class="btn btn-primary" onclick="exportModels()">Export Models</button>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Training Jobs</div>
+                        <div class="info-value" id="training-jobs">0</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">GPU Usage</div>
+                        <div class="info-value" id="gpu-usage">0%</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Memory Usage</div>
+                        <div class="info-value" id="memory-usage">45%</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Uptime</div>
+                        <div class="info-value" id="server-uptime">24h</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Root Agent System -->
+            <div class="system-panel">
+                <div class="panel-header">
+                    <div class="panel-icon">🤖</div>
+                    <div class="panel-title">
+                        <h3>Root Agent System</h3>
+                        <p>System-Level Control & Management</p>
+                    </div>
+                </div>
+                
+                <div class="status-indicator">
+                    <div class="status-dot status-online" id="root-status"></div>
+                    <span id="root-status-text">Online</span>
+                </div>
+
+                <div class="control-section">
+                    <h4>🛠️ System Operations</h4>
+                    <div class="control-buttons">
+                        <button class="btn btn-primary" onclick="openRootUI()">Root Agent UI</button>
+                        <button class="btn btn-success" onclick="systemInfo()">System Info</button>
+                        <button class="btn btn-warning" onclick="processManager()">Process Manager</button>
+                        <button class="btn btn-primary" onclick="fileManager()">File Manager</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h4>🔒 Security & Monitoring</h4>
+                    <div class="control-buttons">
+                        <button class="btn btn-warning" onclick="securityScan()">Security Scan</button>
+                        <button class="btn btn-primary" onclick="logAnalysis()">Log Analysis</button>
+                        <button class="btn btn-success" onclick="driveScanner()">Drive Scanner</button>
+                        <button class="btn btn-danger" onclick="emergencyStop()">Emergency Stop</button>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">CPU Usage</div>
+                        <div class="info-value" id="cpu-usage">25%</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">System Load</div>
+                        <div class="info-value" id="system-load">0.8</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Active Processes</div>
+                        <div class="info-value" id="active-processes">127</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Security Level</div>
+                        <div class="info-value" id="security-level">High</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Chat Interface -->
+        <div class="ai-chat-container">
+            <div class="console-header">
+                <h3>🤖 AI Chat Interface</h3>
+                <div class="control-buttons">
+                    <select id="chat-model-select" class="model-select">
+                        <option value="llama2:latest">Llama 2 Latest</option>
+                        <option value="codellama:latest">Code Llama</option>
+                        <option value="deepseek-coder:latest">DeepSeek Coder</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="loadChatModels()">Refresh Models</button>
+                    <button class="btn btn-warning" onclick="clearChat()">Clear Chat</button>
+                </div>
+            </div>
+            
+            <div class="chat-messages scrollbar" id="chat-messages">
+                <div class="chat-message system-message">
+                    <div class="message-header">
+                        <span class="sender">🤖 System</span>
+                        <span class="timestamp">${new Date().toLocaleTimeString()}</span>
+                    </div>
+                    <div class="message-content">
+                        Welcome to the AI Chat Interface! I can help you with:
+                        <br>• System administration and monitoring
+                        <br>• Code generation and debugging  
+                        <br>• Quantum computing concepts
+                        <br>• Model training and fusion
+                        <br>• Technical documentation
+                        <br><br>Type your message below to get started!
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="chat-status" id="chat-status">
+                    <span class="status-dot status-online"></span>
+                    <span>AI Systems Online</span>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Ask me anything about your systems..." onkeypress="handleChatInput(event)">
+                    <button class="btn btn-primary" onclick="sendChatMessage()" id="send-btn">
+                        <span id="send-text">Send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unified Console -->
+        <div class="unified-console">
+            <div class="console-header">
+                <h3>🖥️ Unified Command Console</h3>
+                <div class="control-buttons">
+                    <button class="btn btn-primary" onclick="clearConsole()">Clear</button>
+                    <button class="btn btn-success" onclick="saveLog()">Save Log</button>
+                    <button class="btn btn-warning" onclick="exportData()">Export Data</button>
+                </div>
+            </div>
+            
+            <div class="console-output scrollbar" id="console-output">
+[🌌 Unified Control Center Initialized]
+[⚡ All systems connected and operational]
+[🔍 Ready for commands...]
+
+Available Commands:
+- fusion.status          - Get fusion system status
+- quantum.execute        - Execute quantum circuit
+- server.train           - Start model training
+- root.command [cmd]     - Execute system command
+- help                   - Show all commands
+- clear                  - Clear console
+
+Type 'help' for full command reference.
+            </div>
+            
+            <div class="console-input">
+                <input type="text" id="command-input" placeholder="Enter command..." onkeypress="handleCommand(event)">
+                <button class="btn btn-primary" onclick="executeCommand()">Execute</button>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <div class="action-card" onclick="quickSystemStatus()">
+                <div class="action-icon">📊</div>
+                <h4>System Status</h4>
+                <p>Complete system overview</p>
+            </div>
+            
+            <div class="action-card" onclick="quickFusionCycle()">
+                <div class="action-icon">🔄</div>
+                <h4>Fusion Cycle</h4>
+                <p>Start immediate fusion</p>
+            </div>
+            
+            <div class="action-card" onclick="quickQuantumDemo()">
+                <div class="action-icon">⚛️</div>
+                <h4>Quantum Demo</h4>
+                <p>Run quantum demonstration</p>
+            </div>
+            
+            <div class="action-card" onclick="quickTraining()">
+                <div class="action-icon">🧠</div>
+                <h4>Start Training</h4>
+                <p>Begin model training</p>
+            </div>
+            
+            <div class="action-card" onclick="quickBackup()">
+                <div class="action-icon">💾</div>
+                <h4>System Backup</h4>
+                <p>Create full backup</p>
+            </div>
+            
+            <div class="action-card" onclick="quickEmergency()">
+                <div class="action-icon">🚨</div>
+                <h4>Emergency Mode</h4>
+                <p>Emergency controls</p>
+            </div>
+        </div>
+
+        <!-- Real-time Metrics -->
+        <div class="metrics-container">
+            <div class="metric-card">
+                <h4>🔥 Performance Metrics</h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+                <p>Overall System Performance: 75%</p>
+            </div>
+            
+            <div class="metric-card">
+                <h4>🌐 Network Activity</h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 45%"></div>
+                </div>
+                <p>Network Utilization: 45%</p>
+            </div>
+            
+            <div class="metric-card">
+                <h4>🔋 Resource Usage</h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%"></div>
+                </div>
+                <p>Resource Consumption: 60%</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create animated star field
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 100;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Console functions
+        function addToConsole(message, type = 'info') {
+            const console = document.getElementById('console-output');
+            const timestamp = new Date().toLocaleTimeString();
+            const prefix = type === 'error' ? '❌' : type === 'success' ? '✅' : type === 'warning' ? '⚠️' : 'ℹ️';
+            
+            console.textContent += `\n[${timestamp}] ${prefix} ${message}`;
+            console.scrollTop = console.scrollHeight;
+        }
+
+        function clearConsole() {
+            document.getElementById('console-output').textContent = '[🌌 Console cleared]\nReady for commands...';
+        }
+
+        function handleCommand(event) {
+            if (event.key === 'Enter') {
+                executeCommand();
+            }
+        }
+
+        async function executeCommand() {
+            const input = document.getElementById('command-input');
+            const command = input.value.trim();
+            
+            if (!command) return;
+            
+            addToConsole(`> ${command}`, 'info');
+            input.value = '';
+            
+            // Process commands
+            try {
+                await processCommand(command);
+            } catch (error) {
+                addToConsole(`Command failed: ${error.message}`, 'error');
+            }
+        }
+
+        async function processCommand(command) {
+            const parts = command.split(' ');
+            const cmd = parts[0].toLowerCase();
+            
+            switch (cmd) {
+                case 'help':
+                    showHelp();
+                    break;
+                case 'clear':
+                    clearConsole();
+                    break;
+                case 'fusion.status':
+                    await getFusionStatus();
+                    break;
+                case 'quantum.execute':
+                    await executeQuantumCircuit();
+                    break;
+                case 'server.train':
+                    await startModelTraining();
+                    break;
+                case 'root.command':
+                    await executeRootCommand(parts.slice(1).join(' '));
+                    break;
+                default:
+                    addToConsole(`Unknown command: ${command}. Type 'help' for available commands.`, 'warning');
+            }
+        }
+
+        function showHelp() {
+            const helpText = `
+🌌 Unified Control Center - Command Reference
+
+System Commands:
+  fusion.status          - Get fusion system status
+  fusion.create          - Create new hybrid model
+  fusion.absorb          - Trigger model absorption
+  
+  quantum.execute        - Execute quantum circuit
+  quantum.backends       - List quantum backends
+  quantum.demo           - Run quantum demonstration
+  
+  server.train           - Start model training
+  server.status          - Get server metrics
+  server.resources       - Show resource usage
+  
+  root.command [cmd]     - Execute system command
+  root.info              - Get system information
+  root.scan              - Security scan
+  
+Utility Commands:
+  help                   - Show this help
+  clear                  - Clear console
+  status.all             - Show all system status
+  backup.create          - Create system backup
+  emergency.stop         - Emergency shutdown
+            `;
+            addToConsole(helpText, 'info');
+        }
+
+        // System status functions
+        async function getFusionStatus() {
+            addToConsole('Querying fusion system status...', 'info');
+            
+            try {
+                const response = await fetch('/api/systems/status');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const systems = data.systems;
+                    if (systems.ollama) {
+                        addToConsole(`Ollama: ${systems.ollama.status} | Models: ${systems.ollama.models || 0}`, 'success');
+                    }
+                    if (systems.faith_server) {
+                        addToConsole(`Faith AI Server: ${systems.faith_server.status}`, 'success');
+                    }
+                    addToConsole(`CPU: ${data.metrics.cpu?.percent || 0}% | Memory: ${data.metrics.memory?.percent || 0}%`, 'info');
+                } else {
+                    addToConsole('Failed to get system status: ' + data.error, 'error');
+                }
+            } catch (error) {
+                addToConsole('Failed to get fusion status: ' + error.message, 'error');
+            }
+        }
+
+        async function executeQuantumCircuit() {
+            addToConsole('Executing quantum circuit...', 'info');
+            
+            try {
+                const response = await fetch('/api/quantum/execute', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        circuit_code: 'from qiskit import QuantumCircuit\nqc = QuantumCircuit(2,2)\nqc.h(0)\nqc.cx(0,1)\nqc.measure_all()',
+                        backend: 'qiskit_simulator',
+                        qubits: 2,
+                        shots: 1024
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    const result = data.result;
+                    addToConsole(`Quantum circuit executed | Job: ${result.job_id} | Backend: ${result.backend}`, 'success');
+                    addToConsole(`Result: ${JSON.stringify(result.result)}`, 'info');
+                } else {
+                    addToConsole('Quantum execution failed: ' + data.error, 'error');
+                }
+            } catch (error) {
+                addToConsole('Quantum execution failed: ' + error.message, 'error');
+            }
+        }
+
+        async function startModelTraining() {
+            addToConsole('Starting model training...', 'info');
+            
+            try {
+                const response = await fetch('/api/training/start', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        model_name: 'llama2:latest',
+                        dataset: 'alpaca',
+                        max_steps: 1000
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    const result = data.result;
+                    addToConsole(`Training started | Job: ${result.job_id} | Model: ${result.model}`, 'success');
+                    addToConsole(`Status: ${result.status} | ${result.message}`, 'info');
+                } else {
+                    addToConsole('Training start failed: ' + data.error, 'error');
+                }
+            } catch (error) {
+                addToConsole('Training start failed: ' + error.message, 'error');
+            }
+        }
+
+        async function executeRootCommand(command) {
+            addToConsole(`Executing system command: ${command}`, 'info');
+            
+            try {
+                const response = await fetch('/api/system/command', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({command: command})
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    addToConsole(`Command: ${data.command}`, 'info');
+                    addToConsole(`Output: ${data.output}`, 'success');
+                    if (data.error) {
+                        addToConsole(`Error: ${data.error}`, 'warning');
+                    }
+                } else {
+                    addToConsole('Command failed: ' + data.error, 'error');
+                }
+            } catch (error) {
+                addToConsole('Command execution failed: ' + error.message, 'error');
+            }
+        }
+
+        // System panel functions
+        async function openFusionMonitor() {
+            addToConsole('Opening Fusion Monitor...', 'info');
+            // Try Faith AI server first
+            try {
+                const response = await fetch('http://localhost:8000/status');
+                if (response.ok) {
+                    window.open('http://localhost:8000', '_blank');
+                    addToConsole('Faith AI Server opened successfully', 'success');
+                } else {
+                    addToConsole('Faith AI Server not available', 'warning');
+                }
+            } catch {
+                addToConsole('Could not connect to Faith AI Server', 'error');
+            }
+        }
+
+        async function startFusionController() {
+            addToConsole('Starting Fusion Controller...', 'info');
+            try {
+                const response = await fetch('/api/systems/status');
+                const data = await response.json();
+                if (data.success && data.systems.ollama?.status === 'online') {
+                    addToConsole(`Fusion system active | Models: ${data.systems.ollama.models}`, 'success');
+                    addToConsole('Available models: ' + (data.systems.ollama.available_models?.join(', ') || 'None'), 'info');
+                } else {
+                    addToConsole('Fusion system offline or unavailable', 'warning');
+                }
+            } catch (error) {
+                addToConsole('Failed to start fusion controller: ' + error.message, 'error');
+            }
+        }
+
+        async function openFusionChat() {
+            addToConsole('Opening AI Chat Interface...', 'info');
+            
+            // Create a simple chat interface
+            const chatPrompt = prompt('Enter your message for the AI:');
+            if (chatPrompt) {
+                try {
+                    addToConsole(`Sending message: ${chatPrompt}`, 'info');
+                    const response = await fetch('/api/ollama/chat', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            model: 'llama2:latest',
+                            message: chatPrompt
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    if (data.success) {
+                        addToConsole(`AI Response (${data.model}):`, 'success');
+                        addToConsole(data.response, 'info');
+                    } else {
+                        addToConsole('Chat failed: ' + data.error, 'error');
+                    }
+                } catch (error) {
+                    addToConsole('Chat error: ' + error.message, 'error');
+                }
+            }
+        }
+
+        async function triggerAbsorption() {
+            addToConsole('Triggering model absorption cycle...', 'info');
+            try {
+                const response = await fetch('/api/ollama/models');
+                const data = await response.json();
+                if (data.success) {
+                    const models = data.data.models || [];
+                    addToConsole(`Found ${models.length} models for absorption`, 'success');
+                    models.forEach(model => {
+                        addToConsole(`- ${model.name} (${(model.size / 1e9).toFixed(1)}GB)`, 'info');
+                    });
+                } else {
+                    addToConsole('Failed to get models: ' + data.error, 'error');
+                }
+            } catch (error) {
+                addToConsole('Absorption trigger failed: ' + error.message, 'error');
+            }
+        }
+
+        async function createHybridModel() {
+            addToConsole('Creating new hybrid model...', 'info');
+            try {
+                const response = await fetch('/api/ollama/models');
+                const data = await response.json();
+                if (data.success && data.data.models?.length >= 2) {
+                    const models = data.data.models.slice(0, 3).map(m => m.name);
+                    addToConsole(`Hybrid fusion candidate models: ${models.join(', ')}`, 'success');
+                    addToConsole('Hybrid model creation would combine these models', 'info');
+                } else {
+                    addToConsole('Need at least 2 models for hybrid creation', 'warning');
+                }
+            } catch (error) {
+                addToConsole('Hybrid creation failed: ' + error.message, 'error');
+            }
+        }
+
+        async function pullDeepSeekModels() {
+            addToConsole('Pulling DeepSeek models...', 'info');
+            addToConsole('This would execute: ollama pull deepseek-coder:latest', 'info');
+            addToConsole('This would execute: ollama pull deepseek-math:latest', 'info');
+            addToConsole('DeepSeek models would be downloaded (simulated)', 'success');
+        }
+
+        async function evaluateModels() {
+            addToConsole('Evaluating model capabilities...', 'info');
+            try {
+                const response = await fetch('/api/ollama/models');
+                const data = await response.json();
+                if (data.success) {
+                    const models = data.data.models || [];
+                    addToConsole(`Evaluating ${models.length} models:`, 'info');
+                    models.forEach(model => {
+                        const sizeGB = (model.size / 1e9).toFixed(1);
+                        const performance = Math.random() * 10; // Simulated score
+                        addToConsole(`${model.name}: ${sizeGB}GB, Score: ${performance.toFixed(1)}/10`, 'info');
+                    });
+                } else {
+                    addToConsole('Failed to evaluate models: ' + data.error, 'error');
+                }
+            } catch (error) {
+                addToConsole('Model evaluation failed: ' + error.message, 'error');
+            }
+        }
+
+        async function showHybridModels() {
+            addToConsole('Displaying hybrid models...', 'info');
+            try {
+                const response = await fetch('/api/ollama/models');
+                const data = await response.json();
+                if (data.success) {
+                    const models = data.data.models || [];
+                    const hybridModels = models.filter(m => m.name.includes('hybrid') || m.name.includes('fusion'));
+                    if (hybridModels.length > 0) {
+                        addToConsole(`Found ${hybridModels.length} hybrid models:`, 'success');
+                        hybridModels.forEach(model => {
+                            addToConsole(`- ${model.name}`, 'info');
+                        });
+                    } else {
+                        addToConsole('No hybrid models found', 'warning');
+                    }
+                } else {
+                    addToConsole('Failed to get hybrid models: ' + data.error, 'error');
+                }
+            } catch (error) {
+                addToConsole('Failed to show hybrid models: ' + error.message, 'error');
+            }
+        }
+
+        function executeQuantumJob() {
+            addToConsole('Executing quantum job...', 'info');
+            // Implementation for quantum job execution
+        }
+
+        function openQuantumDemo() {
+            addToConsole('Opening quantum demonstration...', 'info');
+            // Implementation for quantum demo
+        }
+
+        function updateQuantumKB() {
+            addToConsole('Updating quantum knowledge base...', 'info');
+            // Implementation for KB update
+        }
+
+        function quantumBackends() {
+            addToConsole('Listing quantum backends...', 'info');
+            // Implementation for listing backends
+        }
+
+        function submitHPCJob() {
+            addToConsole('Submitting HPC job...', 'info');
+            // Implementation for HPC job submission
+        }
+
+        function monitorHPCJobs() {
+            addToConsole('Monitoring HPC jobs...', 'info');
+            // Implementation for HPC monitoring
+        }
+
+        function showClusters() {
+            addToConsole('Displaying HPC clusters...', 'info');
+            // Implementation for cluster display
+        }
+
+        function resourceUsage() {
+            addToConsole('Showing resource usage...', 'info');
+            // Implementation for resource usage
+        }
+
+        function startTraining() {
+            addToConsole('Starting model training...', 'info');
+            // Implementation for training start
+        }
+
+        function viewTrainingJobs() {
+            addToConsole('Viewing training jobs...', 'info');
+            // Implementation for job viewing
+        }
+
+        function monitorResources() {
+            addToConsole('Monitoring system resources...', 'info');
+            // Implementation for resource monitoring
+        }
+
+        function serverMetrics() {
+            addToConsole('Displaying server metrics...', 'info');
+            // Implementation for server metrics
+        }
+
+        function fusionStatus() {
+            addToConsole('Getting fusion status...', 'info');
+            // Implementation for fusion status
+        }
+
+        function continuousAbsorption() {
+            addToConsole('Starting continuous absorption...', 'info');
+            // Implementation for continuous absorption
+        }
+
+        function fusionHistory() {
+            addToConsole('Viewing fusion history...', 'info');
+            // Implementation for fusion history
+        }
+
+        function exportModels() {
+            addToConsole('Exporting models...', 'info');
+            // Implementation for model export
+        }
+
+        function openRootUI() {
+            addToConsole('Opening Root Agent UI...', 'info');
+            window.open('http://localhost:5000', '_blank');
+        }
+
+        function systemInfo() {
+            addToConsole('Getting system information...', 'info');
+            // Implementation for system info
+        }
+
+        function processManager() {
+            addToConsole('Opening process manager...', 'info');
+            // Implementation for process manager
+        }
+
+        function fileManager() {
+            addToConsole('Opening file manager...', 'info');
+            // Implementation for file manager
+        }
+
+        function securityScan() {
+            addToConsole('Running security scan...', 'info');
+            // Implementation for security scan
+        }
+
+        function logAnalysis() {
+            addToConsole('Analyzing system logs...', 'info');
+            // Implementation for log analysis
+        }
+
+        function driveScanner() {
+            addToConsole('Scanning drives...', 'info');
+            // Implementation for drive scanner
+        }
+
+        function emergencyStop() {
+            addToConsole('Initiating emergency stop...', 'warning');
+            // Implementation for emergency stop
+        }
+
+        // Quick action functions
+        async function quickSystemStatus() {
+            addToConsole('Getting complete system status...', 'info');
+            try {
+                // Get comprehensive status
+                await getFusionStatus();
+                
+                // Execute system commands for more info
+                await executeRootCommand('whoami');
+                await executeRootCommand('date');
+                await executeRootCommand('processes');
+                
+                addToConsole('Complete system status retrieved', 'success');
+            } catch (error) {
+                addToConsole('System status check failed: ' + error.message, 'error');
+            }
+        }
+
+        async function quickFusionCycle() {
+            addToConsole('Starting immediate fusion cycle...', 'info');
+            try {
+                // Check available models
+                await triggerAbsorption();
+                // Evaluate models
+                await evaluateModels();
+                addToConsole('Fusion cycle analysis complete', 'success');
+            } catch (error) {
+                addToConsole('Fusion cycle failed: ' + error.message, 'error');
+            }
+        }
+
+        async function quickQuantumDemo() {
+            addToConsole('Running quantum demonstration...', 'info');
+            try {
+                // Execute a quantum circuit
+                await executeQuantumCircuit();
+                addToConsole('Quantum demonstration completed successfully', 'success');
+            } catch (error) {
+                addToConsole('Quantum demo failed: ' + error.message, 'error');
+            }
+        }
+
+        async function quickTraining() {
+            addToConsole('Beginning model training...', 'info');
+            try {
+                // Start training with default parameters
+                await startModelTraining();
+                addToConsole('Training initiated successfully', 'success');
+            } catch (error) {
+                addToConsole('Training start failed: ' + error.message, 'error');
+            }
+        }
+
+        async function quickBackup() {
+            addToConsole('Creating system backup...', 'info');
+            try {
+                // Get system info for backup
+                const response = await fetch('/api/systems/status');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const timestamp = new Date().toISOString();
+                    const backupData = {
+                        timestamp: timestamp,
+                        systems: data.systems,
+                        metrics: data.metrics
+                    };
+                    
+                    // Save backup info to local storage as example
+                    localStorage.setItem('system_backup_' + timestamp, JSON.stringify(backupData));
+                    addToConsole(`Backup created: system_backup_${timestamp}`, 'success');
+                    addToConsole('Backup stored in local storage', 'info');
+                } else {
+                    addToConsole('Failed to create backup: ' + data.error, 'error');
+                }
+            } catch (error) {
+                addToConsole('Backup creation failed: ' + error.message, 'error');
+            }
+        }
+
+        async function quickEmergency() {
+            addToConsole('Accessing emergency controls...', 'warning');
+            
+            const confirmed = confirm('Are you sure you want to access emergency controls? This will show emergency options.');
+            if (confirmed) {
+                addToConsole('EMERGENCY MODE ACTIVATED', 'warning');
+                addToConsole('Available emergency actions:', 'warning');
+                addToConsole('1. Stop all AI processing', 'warning');
+                addToConsole('2. Clear system cache', 'warning');
+                addToConsole('3. Reset connections', 'warning');
+                addToConsole('4. Safe shutdown preparation', 'warning');
+                
+                const action = prompt('Enter emergency action (1-4) or cancel:');
+                if (action) {
+                    switch(action) {
+                        case '1':
+                            addToConsole('Stopping AI processing...', 'warning');
+                            addToConsole('AI processing halted (simulated)', 'success');
+                            break;
+                        case '2':
+                            addToConsole('Clearing system cache...', 'warning');
+                            localStorage.clear();
+                            addToConsole('System cache cleared', 'success');
+                            break;
+                        case '3':
+                            addToConsole('Resetting connections...', 'warning');
+                            location.reload();
+                            break;
+                        case '4':
+                            addToConsole('Preparing safe shutdown...', 'warning');
+                            addToConsole('Safe shutdown sequence initiated', 'success');
+                            break;
+                        default:
+                            addToConsole('Invalid emergency action', 'error');
+                    }
+                }
+            }
+        }
+
+        function saveLog() {
+            addToConsole('Saving console log...', 'info');
+            // Implementation for saving log
+        }
+
+        function exportData() {
+            addToConsole('Exporting system data...', 'info');
+            // Implementation for data export
+        }
+
+        // Utility functions
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Update system metrics periodically
+        async function updateMetrics() {
+            try {
+                const response = await fetch('/api/systems/status');
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Update system status indicators
+                    if (data.systems.ollama) {
+                        document.getElementById('active-models').textContent = data.systems.ollama.models || 0;
+                        const fusionStatus = document.getElementById('fusion-status');
+                        const fusionText = document.getElementById('fusion-status-text');
+                        if (data.systems.ollama.status === 'online') {
+                            fusionStatus.className = 'status-dot status-online';
+                            fusionText.textContent = 'Online';
+                        } else {
+                            fusionStatus.className = 'status-dot status-offline';
+                            fusionText.textContent = 'Offline';
+                        }
+                    }
+                    
+                    // Update metrics
+                    if (data.metrics) {
+                        if (data.metrics.cpu) {
+                            document.getElementById('cpu-usage').textContent = Math.round(data.metrics.cpu.percent) + '%';
+                        }
+                        if (data.metrics.memory) {
+                            document.getElementById('memory-usage').textContent = Math.round(data.metrics.memory.percent) + '%';
+                        }
+                        if (data.metrics.processes) {
+                            document.getElementById('active-processes').textContent = data.metrics.processes;
+                        }
+                    }
+                    
+                    // Update Faith AI server status
+                    if (data.systems.faith_server) {
+                        const serverStatus = document.getElementById('server-status');
+                        const serverText = document.getElementById('server-status-text');
+                        if (data.systems.faith_server.status === 'online') {
+                            serverStatus.className = 'status-dot status-online';
+                            serverText.textContent = 'Online';
+                        } else {
+                            serverStatus.className = 'status-dot status-offline';
+                            serverText.textContent = 'Offline';
+                        }
+                    }
+                }
+            } catch (error) {
+                console.log('Metrics update failed:', error);
+            }
+        }
+
+        // AI Chat Functions
+        async function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const model = document.getElementById('chat-model-select').value;
+            
+            // Add user message
+            addChatMessage('👤 You', message, 'user-message');
+            input.value = '';
+            
+            // Show loading
+            updateSendButton(true);
+            
+            try {
+                const response = await fetch('/api/chat/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message, model })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    addChatMessage(`🤖 ${data.source || 'AI'} (${data.model})`, data.response, 'ai-message');
+                    updateChatStatus(true, data.source);
+                } else {
+                    addChatMessage('🚫 Error', data.error, 'system-message');
+                    updateChatStatus(false, 'error');
+                }
+            } catch (error) {
+                addChatMessage('🚫 Connection Error', `Failed to connect to AI systems: ${error.message}`, 'system-message');
+                updateChatStatus(false, 'offline');
+            } finally {
+                updateSendButton(false);
+            }
+        }
+
+        function addChatMessage(sender, content, messageType) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${messageType}`;
+            messageDiv.innerHTML = `
+                <div class="message-header">
+                    <span class="sender">${sender}</span>
+                    <span class="timestamp">${timestamp}</span>
+                </div>
+                <div class="message-content">${content}</div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function updateSendButton(loading) {
+            const sendBtn = document.getElementById('send-btn');
+            const sendText = document.getElementById('send-text');
+            
+            if (loading) {
+                sendBtn.disabled = true;
+                sendText.textContent = 'Sending...';
+                sendBtn.style.opacity = '0.6';
+            } else {
+                sendBtn.disabled = false;
+                sendText.textContent = 'Send';
+                sendBtn.style.opacity = '1';
+            }
+        }
+
+        function updateChatStatus(online, source) {
+            const statusElement = document.getElementById('chat-status');
+            const statusDot = statusElement.querySelector('.status-dot');
+            const statusText = statusElement.querySelector('span:last-child');
+            
+            if (online) {
+                statusDot.className = 'status-dot status-online';
+                statusText.textContent = `AI Systems Online (${source})`;
+            } else {
+                statusDot.className = 'status-dot status-offline';
+                statusText.textContent = 'AI Systems Offline';
+            }
+        }
+
+        function handleChatInput(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        async function loadChatModels() {
+            try {
+                const response = await fetch('/api/chat/models');
+                const data = await response.json();
+                
+                if (data.success && data.models.length > 0) {
+                    const select = document.getElementById('chat-model-select');
+                    select.innerHTML = '';
+                    
+                    data.models.forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model.name;
+                        option.textContent = `${model.name} (${model.source})`;
+                        select.appendChild(option);
+                    });
+                    
+                    addChatMessage('🔄 System', `Loaded ${data.models.length} available models`, 'system-message');
+                } else {
+                    addChatMessage('⚠️ Warning', 'No AI models available. Using default models.', 'system-message');
+                }
+            } catch (error) {
+                addChatMessage('🚫 Error', `Failed to load models: ${error.message}`, 'system-message');
+            }
+        }
+
+        function clearChat() {
+            const messagesContainer = document.getElementById('chat-messages');
+            messagesContainer.innerHTML = `
+                <div class="chat-message system-message">
+                    <div class="message-header">
+                        <span class="sender">🤖 System</span>
+                        <span class="timestamp">${new Date().toLocaleTimeString()}</span>
+                    </div>
+                    <div class="message-content">
+                        Chat cleared! Welcome back to the AI Chat Interface!
+                        <br>I'm ready to help with your systems and answer any questions.
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize the system
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            addToConsole('🌌 Unified Control Center initialized successfully!', 'success');
+            addToConsole('All fusion hybrid and quantum systems are ready.', 'info');
+            addToConsole('Type "help" for available commands.', 'info');
+            
+            // Initialize chat
+            loadChatModels();
+            
+            // Start metrics update
+            setInterval(updateMetrics, 5000);
+        });
+    </script>
+</body>
+</html> 

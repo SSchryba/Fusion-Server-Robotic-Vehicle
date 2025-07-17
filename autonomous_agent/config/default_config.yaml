@@ -1,0 +1,172 @@
+# Autonomous AI Agent Framework Configuration
+
+# Core Agent Settings
+agent:
+  name: "AutonomousAgent"
+  version: "1.0.0"
+  log_level: "INFO"
+  max_concurrent_tasks: 3
+  task_timeout_seconds: 300
+
+# Prime Directive Configuration
+directive:
+  primary: |
+    I am an autonomous AI agent designed to help users achieve their goals efficiently and safely.
+    I will prioritize user objectives while maintaining ethical standards and safety protocols.
+    I continuously learn from interactions to improve my effectiveness.
+  
+  constraints:
+    - "Never cause harm to users or systems"
+    - "Respect privacy and data security"
+    - "Operate within defined resource limits"
+    - "Maintain transparency in actions"
+    - "Seek clarification when uncertain"
+  
+  goals:
+    - "Maximize user productivity and satisfaction"
+    - "Learn and adapt from experiences"
+    - "Maintain system stability and security"
+    - "Provide clear communication and feedback"
+
+# Memory System Configuration
+memory:
+  provider: "chromadb"
+  collection_name: "agent_memory"
+  max_memories: 10000
+  similarity_threshold: 0.7
+  embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+  
+  persistence:
+    enabled: true
+    path: "./data/memory"
+    backup_interval_hours: 24
+
+# Module Configuration
+modules:
+  planner:
+    enabled: true
+    max_subtasks: 10
+    planning_timeout: 60
+    use_llm: true
+    
+  executor:
+    enabled: true
+    max_retries: 3
+    retry_delay_seconds: 5
+    parallel_execution: false
+    
+  critic:
+    enabled: true
+    scoring_model: "weighted_average"
+    success_threshold: 0.7
+    failure_threshold: 0.3
+    
+  observer:
+    enabled: true
+    detailed_logging: true
+    metrics_collection: true
+
+# Scheduler Configuration
+scheduler:
+  enabled: true
+  check_interval_seconds: 30
+  max_pending_tasks: 100
+  
+  triggers:
+    failure_retry_delay: 300
+    goal_reassessment_interval: 3600
+    memory_cleanup_interval: 86400
+
+# Action System Configuration
+actions:
+  enabled: true
+  sandbox_mode: true
+  max_action_time: 60
+  
+  allowed_commands:
+    - "ls"
+    - "pwd"
+    - "cat"
+    - "echo"
+    - "curl"
+    - "python"
+    - "pip"
+    
+  restricted_paths:
+    - "/etc"
+    - "/sys"
+    - "/proc"
+    - "/root"
+    
+  api_endpoints:
+    max_requests_per_minute: 60
+    timeout_seconds: 30
+
+# Safety and Safeguards
+safety:
+  enabled: true
+  
+  rate_limits:
+    actions_per_minute: 30
+    api_calls_per_minute: 60
+    memory_writes_per_minute: 120
+    
+  monitoring:
+    track_resource_usage: true
+    alert_on_anomalies: true
+    log_all_actions: true
+    
+  permissions:
+    require_approval_for:
+      - "file_write"
+      - "system_command"
+      - "api_post_request"
+      - "data_deletion"
+
+# Curiosity and Learning
+curiosity:
+  enabled: true
+  novelty_threshold: 0.6
+  exploration_rate: 0.1
+  
+  scoring:
+    information_gain_weight: 0.4
+    uncertainty_weight: 0.3
+    diversity_weight: 0.3
+    
+  subgoal_generation:
+    max_subgoals: 5
+    creativity_factor: 0.7
+
+# LLM Integration (Optional)
+llm:
+  provider: "openai"  # or "anthropic", "local"
+  model: "gpt-4"
+  api_key: null  # Set via environment variable
+  
+  parameters:
+    temperature: 0.7
+    max_tokens: 2000
+    top_p: 0.9
+    
+  fallback:
+    use_local_model: true
+    local_model_path: "./models/local"
+
+# Data and Storage
+storage:
+  data_directory: "./data"
+  logs_directory: "./logs"
+  cache_directory: "./cache"
+  
+  retention:
+    logs_days: 30
+    cache_days: 7
+    metrics_days: 90
+
+# Development and Debug
+debug:
+  enabled: false
+  verbose_logging: false
+  save_intermediate_results: false
+  disable_safety_checks: false 

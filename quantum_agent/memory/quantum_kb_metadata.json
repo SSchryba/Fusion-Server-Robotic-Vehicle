@@ -1,0 +1,681 @@
+[
+  {
+    "id": "qiskit_-4034986861419229820_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/api/qiskit",
+    "source": "qiskit",
+    "doc_type": "api"
+  },
+  {
+    "id": "qiskit_2081954187798313348_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/api/qiskit-transpiler-service-rest",
+    "source": "qiskit",
+    "doc_type": "api"
+  },
+  {
+    "id": "qiskit_5051915181171976200_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-8141036875762610808_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/../api/qiskit/release-notes",
+    "source": "qiskit",
+    "doc_type": "api"
+  },
+  {
+    "id": "qiskit_-1458633049369425395_0",
+    "title": "12. Virtual Environments and Packages \u2014 Python 3.10.18 documentation",
+    "url": "https://docs.python.org/3.10/tutorial/venv.html",
+    "source": "qiskit",
+    "doc_type": "tutorial"
+  },
+  {
+    "id": "qiskit_-5546495638427988590_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/support",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-2601255393928281837_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/save-jobs",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-8748753964371281899_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/visualize-results",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_4336983356311915157_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/configure-qiskit-local",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-3979231589408941541_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/migration-guides/qiskit-1.0",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_132152759626168988_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/custom-transpiler-pass",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-8950074623414761185_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/execute-on-hardware",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-5146977998492514780_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/cloud-setup",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-8924568415729371600_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/optimize-for-hardware",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-4432745114657832392_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/tutorials",
+    "source": "qiskit",
+    "doc_type": "tutorial"
+  },
+  {
+    "id": "qiskit_-6572822461848857286_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/tutorials/operator-back-propagation",
+    "source": "qiskit",
+    "doc_type": "tutorial"
+  },
+  {
+    "id": "qiskit_-3111760199528716866_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/api/qiskit-runtime-rest",
+    "source": "qiskit",
+    "doc_type": "api"
+  },
+  {
+    "id": "qiskit_1957959519930842046_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/tutorials/hello-world",
+    "source": "qiskit",
+    "doc_type": "tutorial"
+  },
+  {
+    "id": "qiskit_5329749934454630210_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/circuit-library",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-1454832454717850558_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/qiskit-transpiler-service",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_1576130279840701508_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/primitives",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_540113431248986693_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/tutorials/solve-higher-order-binary-optimization-problems-with-q-ctrls-optimization-solver",
+    "source": "qiskit",
+    "doc_type": "tutorial"
+  },
+  {
+    "id": "qiskit_369281266483043921_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/execution-modes",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_2378892771481541330_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/post-process-results",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-6035909786987568548_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/specify-runtime-options",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-7532145038943887651_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/learning",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-1350767397701274658_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/api/qiskit-ibm-runtime",
+    "source": "qiskit",
+    "doc_type": "api"
+  },
+  {
+    "id": "qiskit_8288883277390183392_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/operators-overview",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-651228303117472543_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/map-problem-to-circuits",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_863601675033555047_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/construct-circuits",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-4734491372765461656_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_-6532880604241198991_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/qiskit-code-assistant",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "qiskit_1545393466163938546_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/../api/qiskit-ibm-runtime/release-notes",
+    "source": "qiskit",
+    "doc_type": "api"
+  },
+  {
+    "id": "qiskit_8954944988796914549_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/tutorials/sample-based-quantum-diagonalization",
+    "source": "qiskit",
+    "doc_type": "tutorial"
+  },
+  {
+    "id": "qiskit_-2933285211406884998_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/api/qiskit-ibm-transpiler",
+    "source": "qiskit",
+    "doc_type": "api"
+  },
+  {
+    "id": "qiskit_8146528559641336187_0",
+    "title": "IBM Quantum Documentation",
+    "url": "https://qiskit.org/documentation/docs/guides/transpile-with-pass-managers",
+    "source": "qiskit",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_130576689289702915_0",
+    "title": "Simulate a circuit \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/simulate",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-5649081536677761786_0",
+    "title": "Quantum variational algorithm \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/variational_algorithm",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-4827823179467089653_0",
+    "title": "QAOA \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qaoa",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_5893619952169804064_0",
+    "title": "Hardware grid circuits \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qaoa/hardware_grid_circuits",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-2619830311201341917_0",
+    "title": "Quickstart \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/hfvqe/quickstart",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_3985948946352646181_0",
+    "title": "Data analysis \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/guide/data_analysis",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_1264786515434199079_0",
+    "title": "Quantum walk \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/quantum_walks",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-806660009011659482_0",
+    "title": "Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-3738731883403732951_0",
+    "title": "Experiments using quantum circuits \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_3179679315274349106_0",
+    "title": "Shor's algorithm \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/shor",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_1393566144688032061_0",
+    "title": "Making Molecule Files for HFVQE \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/hfvqe/molecular_data",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-2991189101782697913_0",
+    "title": "Toric Code \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/toric_code",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-2308642632965611189_0",
+    "title": "Build a circuit \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/build",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-3335326836448822964_0",
+    "title": "Research experiments with ReCirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/research",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-6473755159805113263_0",
+    "title": "End-to-End Example \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qcqmc/full_workflow",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_3850375885868896340_0",
+    "title": "Best Practices \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/guide/best_practices",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-6659990599845587116_0",
+    "title": "QAOA example problems \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qaoa/example_problems",
+    "source": "cirq",
+    "doc_type": "example"
+  },
+  {
+    "id": "cirq_5341386768948030809_0",
+    "title": "Fermi-Hubbard experiment example \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/fermi_hubbard/experiment_example",
+    "source": "cirq",
+    "doc_type": "example"
+  },
+  {
+    "id": "cirq_-5965903665338755490_0",
+    "title": "Fourier Checking Problem \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/fourier_checking",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-8843451306539121822_0",
+    "title": "Data collection idioms \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/guide/data_collection_idioms",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_5164777264801464674_0",
+    "title": "QAOA Tasks \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qaoa/tasks",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-2278805400749168533_0",
+    "title": "Textbook algorithms in Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/textbook_algorithms",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-6035140724058716813_0",
+    "title": "Transform a circuit \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/transform",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_1061468104283939959_0",
+    "title": "Landscape analysis \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qaoa/landscape_analysis",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_7230010137813715071_0",
+    "title": "Visualizing Dynamics of Charges and Strings in (2+1)D Lattice Gauge Theories \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/lattice_gauge/lattice_gauge",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_1362314840685918088_0",
+    "title": "Kardar-Parisi-Zhang Dynamics in the Heisenberg Spin Chain \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/kpz/kpz",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-2673971307766084209_0",
+    "title": "Data collection \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/guide/data_collection",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_443314356183123601_0",
+    "title": "Precomputed analysis \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qaoa/precomputed_analysis",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-2119152417211595631_0",
+    "title": "Hartree-Fock on a superconducting qubit quantum processor \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/hfvqe",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-8061705572720626286_0",
+    "title": "Optimization Analysis \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qaoa/optimization_analysis",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_5858037865967346074_0",
+    "title": "Simulation of spin and charge dynamics in the Fermi-Hubbard model \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/fermi_hubbard",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-2601845304809470298_0",
+    "title": "Contribute \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/dev/development",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_7378702311109587625_0",
+    "title": "Information scrambling in computationally complex quantum circuits \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/otoc",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-265825391333996864_0",
+    "title": "Quantum scrambling experiment example \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/otoc/otoc_example",
+    "source": "cirq",
+    "doc_type": "example"
+  },
+  {
+    "id": "cirq_7652288946703503810_0",
+    "title": "Install \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/start/install",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-1327542875293992762_0",
+    "title": "Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-6400855688705990451_0",
+    "title": "Noise management for running circuits \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/noise",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-7119247664539106351_0",
+    "title": "Hidden linear function problem \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/hidden_linear_function",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_1645352713868259027_0",
+    "title": "Fermi-Hubbard spin-charge separation results \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/fermi_hubbard/publication_results",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-7992583320803004455_0",
+    "title": "Hardware \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/hardware",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-1171893589019471384_0",
+    "title": "Routing with t|ket> \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qaoa/routing_with_tket",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-7207321343566443539_0",
+    "title": "QCQMC \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qcqmc",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-6267788153385552913_0",
+    "title": "QCQMC \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qcqmc/high_level",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-7076355803245408526_0",
+    "title": "Analyzing the Experimentally Reconstructed Wavefunctions \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/qcqmc/experimental_wavefunctions",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "cirq_-1784815364207883020_0",
+    "title": "Toric Code Ground State \u00a0|\u00a0 Cirq \u00a0|\u00a0 Google Quantum AI",
+    "url": "https://quantumai.google/cirq/experiments/toric_code/toric_code_ground_state",
+    "source": "cirq",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_1709790396986268548_0",
+    "title": "PennyLane-Rigetti Plugin \u2014 PennyLane-Rigetti 0.40.0 documentation",
+    "url": "https://docs.pennylane.ai/projects/rigetti/en/stable/",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_6832013386542563083_0",
+    "title": "Codebook \u2014 PennyLane",
+    "url": "https://pennylane.ai/codebook",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_2658740975802064655_0",
+    "title": "Discussion Forum \u2014 PennyLane",
+    "url": "https://discuss.pennylane.ai",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_-8517051988128527343_0",
+    "title": "Catalyst \u2014 Catalyst 0.13.0-dev9 documentation",
+    "url": "https://docs.pennylane.ai/projects/catalyst/en/latest/",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_-5201281069281036394_0",
+    "title": "Blog \u2014 PennyLane",
+    "url": "https://pennylane.ai/blog/?page=1",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_-7494160340621629527_0",
+    "title": "Development guide \u2014 PennyLane 0.42.0 documentation",
+    "url": "https://docs.pennylane.ai/en/stable/development/guide.html",
+    "source": "pennylane",
+    "doc_type": "guide"
+  },
+  {
+    "id": "pennylane_4031940183117481008_0",
+    "title": "Coding Challenges \u2014 PennyLane",
+    "url": "https://pennylane.ai/challenges",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_-7699126493480206148_0",
+    "title": "PennyLane-Qiskit Plugin \u2014 PennyLane-Qiskit 0.42.0 documentation",
+    "url": "https://docs.pennylane.ai/projects/qiskit/en/stable/",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_-5654848085524373426_0",
+    "title": "qml \u2014 PennyLane 0.42.0 documentation",
+    "url": "https://docs.pennylane.ai/en/stable/code/qml.html",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_1634964610243990997_0",
+    "title": "PennyLane Documentation \u2014 PennyLane 0.42.0 documentation",
+    "url": "https://docs.pennylane.ai/en/stable/",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_2859280430617496166_0",
+    "title": "Quantum Compilation \u2014 PennyLane",
+    "url": "https://pennylane.ai/compilation",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_-901047202642838040_0",
+    "title": "PennyLane Documentation \u2014 PennyLane 0.42.0 documentation",
+    "url": "https://docs.pennylane.ai",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_-9153714166126336531_0",
+    "title": "Discussion Forum \u2014 PennyLane",
+    "url": "https://discuss.pennylane.ai/",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_-7495311099246358674_0",
+    "title": "Quantum Devices \u2014 PennyLane",
+    "url": "https://pennylane.ai/devices",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_7997631695803608186_0",
+    "title": "Catalyst \u2014 Catalyst 0.12.0 documentation",
+    "url": "https://docs.pennylane.ai/projects/catalyst/en/stable/",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  },
+  {
+    "id": "pennylane_8295516617371105279_0",
+    "title": "PennyLane Documentation \u2014 PennyLane 0.42.0 documentation",
+    "url": "https://docs.pennylane.ai/",
+    "source": "pennylane",
+    "doc_type": "documentation"
+  }
+]

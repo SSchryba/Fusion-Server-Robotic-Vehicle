@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusion Chat Interface</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🧬 Fusion Chat Interface</h1>
+            <div class="header-controls">
+                <select id="modelSelect" class="model-select">
+                    <option value="">Loading models...</option>
+                </select>
+                <button id="statusBtn" class="status-btn">📊 Status</button>
+                <button id="clearBtn" class="clear-btn">🗑️ Clear</button>
+                <a href="/insight-dashboard" class="insight-dashboard-link" style="margin-left:12px;font-weight:bold;">🔍 Insight Dashboard</a>
+                <a href="/docs/api_usage.md" class="api-docs-link" style="margin-left:12px;font-weight:bold;">📖 API Usage</a>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="chat-container">
+                <div id="chatHistory" class="chat-history">
+                    <div class="welcome-message">
+                        <div class="message bot-message">
+                            <div class="message-content">
+                                <h3>Welcome to Fusion Chat! 🚀</h3>
+                                <p>You're now connected to the hybrid fusion model system. This chat interface allows you to interact with intelligently fused AI models that combine the best capabilities from multiple sources.</p>
+                                <p><strong>Features:</strong></p>
+                                <ul>
+                                    <li>🧠 Hybrid model responses combining DeepSeek, Mistral, CodeLlama, and more</li>
+                                    <li>⚡ Real-time responses with performance metrics</li>
+                                    <li>🔄 Automatic model selection and optimization</li>
+                                    <li>📊 Live system status and model information</li>
+                                </ul>
+                                <p>Start typing your message below to begin!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Type your message here... (Ctrl+Enter to send)"
+                            rows="3"
+                            maxlength="4096"
+                        ></textarea>
+                        <div class="input-controls">
+                            <button id="sendBtn" class="send-btn">
+                                <span class="send-text">Send</span>
+                                <span class="send-icon">📤</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="input-status">
+                        <span id="charCount">0 / 4096</span>
+                        <span id="connectionStatus" class="connection-status">🔴 Disconnected</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="status-panel">
+                    <h3>System Status</h3>
+                    <div id="systemStatus" class="status-content">
+                        <div class="status-item">
+                            <span class="status-label">Fusion Server:</span>
+                            <span class="status-value">🔴 Connecting...</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Active Model:</span>
+                            <span class="status-value">-</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Response Time:</span>
+                            <span class="status-value">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="models-panel">
+                    <h3>Available Models</h3>
+                    <div id="modelsList" class="models-content">
+                        Loading models...
+                    </div>
+                </div>
+
+                <div class="conversations-panel">
+                    <h3>Recent Conversations</h3>
+                    <div id="conversationsList" class="conversations-content">
+                        No conversations yet
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Modal -->
+    <div id="statusModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📊 System Status</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="detailedStatus">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html> 

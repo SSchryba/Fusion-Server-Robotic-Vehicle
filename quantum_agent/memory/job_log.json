@@ -1,0 +1,92 @@
+{
+  "last_updated": "2025-07-17T00:00:46.743611",
+  "total_jobs": 2,
+  "jobs": [
+    {
+      "job_id": "8bba77f5-b726-45f6-bd38-334958bcdc5d",
+      "external_job_id": null,
+      "job_type": "quantum_simulation",
+      "platform": "qiskit_simulator",
+      "created_at": "2025-07-16T23:30:39.924416",
+      "submitted_at": null,
+      "started_at": null,
+      "completed_at": "2025-07-16T23:30:39.924416",
+      "description": "Quantum job: 100 shots, 1 qubits",
+      "code_snippet": "\nfrom qiskit import QuantumCircuit\nqc = QuantumCircuit(1, 1)\nqc.h(0)\nqc.measure(0, 0)\n",
+      "parameters": {
+        "shots": 100,
+        "qubits": 1
+      },
+      "resource_requirements": {
+        "qubits": 1,
+        "shots": 100
+      },
+      "status": "failed",
+      "success": false,
+      "output": null,
+      "error_message": "Qiskit is not available",
+      "queue_time_seconds": null,
+      "execution_time_seconds": 0.0,
+      "total_time_seconds": null,
+      "quantum_metrics": {
+        "shots": 100,
+        "qubits": 1,
+        "backend": "QISKIT_SIMULATOR"
+      },
+      "hpc_metrics": null,
+      "cost_estimate": null,
+      "resource_usage": null,
+      "correctness_score": null,
+      "performance_score": null,
+      "efficiency_score": null,
+      "tags": [
+        "quantum",
+        "QISKIT_SIMULATOR"
+      ],
+      "user_notes": ""
+    },
+    {
+      "job_id": "b0b6b7a1-2b26-45a4-a31f-b89e098eab0b",
+      "external_job_id": null,
+      "job_type": "quantum_simulation",
+      "platform": "qiskit_simulator",
+      "created_at": "2025-07-17T00:00:46.743611",
+      "submitted_at": null,
+      "started_at": null,
+      "completed_at": "2025-07-17T00:00:46.743611",
+      "description": "Quantum job: 100 shots, 1 qubits",
+      "code_snippet": "\nfrom qiskit import QuantumCircuit\nqc = QuantumCircuit(1, 1)\nqc.h(0)\nqc.measure(0, 0)\n",
+      "parameters": {
+        "shots": 100,
+        "qubits": 1
+      },
+      "resource_requirements": {
+        "qubits": 1,
+        "shots": 100
+      },
+      "status": "failed",
+      "success": false,
+      "output": null,
+      "error_message": "Qiskit is not available",
+      "queue_time_seconds": null,
+      "execution_time_seconds": 0.0,
+      "total_time_seconds": null,
+      "quantum_metrics": {
+        "shots": 100,
+        "qubits": 1,
+        "backend": "QISKIT_SIMULATOR"
+      },
+      "hpc_metrics": null,
+      "cost_estimate": null,
+      "resource_usage": null,
+      "correctness_score": null,
+      "performance_score": null,
+      "efficiency_score": null,
+      "tags": [
+        "quantum",
+        "QISKIT_SIMULATOR"
+      ],
+      "user_notes": ""
+    }
+  ]
+}

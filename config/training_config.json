@@ -1,0 +1,159 @@
+{
+  "system": {
+    "max_memory_usage_percent": 75,
+    "max_gpu_memory_percent": 85,
+    "min_disk_space_gb": 5,
+    "max_concurrent_jobs": 4,
+    "cleanup_interval_hours": 12,
+    "model_retention_days": 14,
+    "log_retention_days": 60
+  },
+  "training": {
+    "default_max_steps": 2000,
+    "default_save_steps": 200,
+    "default_eval_steps": 400,
+    "default_logging_steps": 25,
+    "default_learning_rate": 1e-4,
+    "default_batch_size": 2,
+    "default_gradient_accumulation_steps": 8,
+    "max_sequence_length": 4096,
+    "max_dataset_samples": 25000,
+    "use_4bit_quantization": true,
+    "use_flash_attention": true,
+    "early_stopping_patience": 5
+  },
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.1,
+    "target_modules": [
+      "q_proj", 
+      "v_proj", 
+      "k_proj", 
+      "o_proj", 
+      "gate_proj", 
+      "up_proj", 
+      "down_proj"
+    ],
+    "bias": "none"
+  },
+  "models": {
+    "deepseek_models": [
+      "deepseek-coder:latest",
+      "deepseek-coder:6.7b",
+      "deepseek-coder:33b",
+      "deepseek-math:latest",
+      "deepseek-llm:latest",
+      "deepseek-v2:latest"
+    ],
+    "priority_models": [
+      "llama2:latest",
+      "mistral:latest",
+      "codellama:latest",
+      "gemma:2b",
+      "phi:latest"
+    ],
+    "large_models": [
+      "llama2:13b",
+      "llama2:70b",
+      "codellama:13b",
+      "mixtral:8x7b",
+      "gemma:7b",
+      "qwen2:latest",
+      "qwen2:72b"
+    ],
+    "specialized_models": [
+      "neural-chat:latest",
+      "starling-lm:latest",
+      "solar:latest",
+      "dolphin-mixtral:latest",
+      "openchat:latest",
+      "wizard-vicuna-uncensored:latest",
+      "orca-mini:latest",
+      "vicuna:latest",
+      "alpaca:latest",
+      "nous-hermes:latest",
+      "nous-hermes2:latest"
+    ],
+    "hybrid_fusion": {
+      "enabled": true,
+      "fusion_interval_hours": 6,
+      "models_per_fusion": 3,
+      "hybrid_output_name": "hybrid-fusion-v{version}",
+      "absorption_strategy": "weighted_average",
+      "continuous_learning": true
+    }
+  },
+  "datasets": {
+    "general": [
+      "alpaca",
+      "dolly",
+      "oasst1"
+    ],
+    "coding": [
+      "code_alpaca"
+    ],
+    "math": [
+      "math_qa",
+      "gsm8k"
+    ],
+    "reasoning": [
+      "commonsense_qa"
+    ],
+    "qa": [
+      "squad",
+      "natural_questions",
+      "trivia_qa"
+    ]
+  },
+  "schedules": {
+    "continuous_training": {
+      "enabled": true,
+      "interval_minutes": 60,
+      "model_rotation": true,
+      "dataset_rotation": true,
+      "prioritize_small_models": true
+    },
+    "maintenance": {
+      "cleanup_time": "02:00",
+      "backup_time": "03:00",
+      "model_evaluation_time": "04:00"
+    }
+  },
+  "monitoring": {
+    "metrics_interval_seconds": 60,
+    "health_check_interval_seconds": 300,
+    "alert_thresholds": {
+      "cpu_percent": 95,
+      "memory_percent": 90,
+      "disk_percent": 95,
+      "gpu_memory_percent": 95
+    },
+    "logging": {
+      "level": "INFO",
+      "max_file_size_mb": 100,
+      "backup_count": 5
+    }
+  },
+  "api": {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "workers": 4,
+    "enable_cors": true,
+    "request_timeout_seconds": 300,
+    "max_request_size_mb": 100
+  },
+  "ollama": {
+    "url": "http://localhost:11434",
+    "timeout_seconds": 300,
+    "retry_attempts": 3,
+    "retry_delay_seconds": 5
+  },
+  "paths": {
+    "models_dir": "models",
+    "logs_dir": "logs",
+    "data_dir": "training_data",
+    "config_dir": "config",
+    "temp_dir": "temp"
+  }
+} 

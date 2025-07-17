@@ -1,0 +1,30 @@
+{
+  "quantum_backends": {
+    "qiskit_simulator": {
+      "enabled": true,
+      "default_shots": 1024
+    },
+    "qiskit_ibm": {
+      "enabled": false,
+      "requires_token": true
+    },
+    "cirq_simulator": {
+      "enabled": true,
+      "default_shots": 1024
+    },
+    "dwave": {
+      "enabled": false,
+      "requires_token": true
+    }
+  },
+  "safety_limits": {
+    "max_qubits_public": 20,
+    "max_shots_public": 8192,
+    "max_circuit_depth": 1000
+  },
+  "hpc_clusters": {},
+  "knowledge_db": {
+    "auto_update": true,
+    "update_interval_hours": 24
+  }
+}

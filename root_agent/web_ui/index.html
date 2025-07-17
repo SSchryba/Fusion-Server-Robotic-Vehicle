@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Root Agent Control Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .function-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .function-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .function-card:hover {
+            border-color: #4facfe;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .function-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .function-card p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .output-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .output-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .output-display {
+            background: #2d3748;
+            color: #a0aec0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .status-bar {
+            background: #e9ecef;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .success {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .error {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Root Agent Control Panel</h1>
+            <p>Friendly interface for system management and automation</p>
+        </div>
+
+        <div class="main-content">
+            <div class="function-grid">
+                <!-- Command Execution -->
+                <div class="function-card" id="cmd-card">
+                    <h3><span class="emoji">⚡</span> Execute Command</h3>
+                    <p>Run system commands safely with built-in security checks</p>
+                    <div class="input-group">
+                        <label for="command-input">Command:</label>
+                        <input type="text" id="command-input" placeholder="echo 'Hello World'" />
+                    </div>
+                    <button class="btn" onclick="executeCommand()">Run Command</button>
+                </div>
+
+                <!-- File Operations -->
+                <div class="function-card" id="file-card">
+                    <h3><span class="emoji">📁</span> File Operations</h3>
+                    <p>Read, write, and manage files with ease</p>
+                    <div class="input-group">
+                        <label for="file-path">File Path:</label>
+                        <input type="text" id="file-path" placeholder="C:\temp\example.txt" />
+                    </div>
+                    <div class="input-group">
+                        <label for="file-content">Content (for writing):</label>
+                        <textarea id="file-content" rows="3" placeholder="File content here..."></textarea>
+                    </div>
+                    <button class="btn" onclick="readFile()">Read File</button>
+                    <button class="btn" onclick="writeFile()" style="margin-top: 10px;">Write File</button>
+                </div>
+
+                <!-- System Info -->
+                <div class="function-card" id="system-card">
+                    <h3><span class="emoji">💻</span> System Information</h3>
+                    <p>Get detailed information about your system</p>
+                    <button class="btn" onclick="getSystemInfo()">Get System Info</button>
+                </div>
+
+                <!-- Directory Listing -->
+                <div class="function-card" id="dir-card">
+                    <h3><span class="emoji">🗂️</span> Directory Explorer</h3>
+                    <p>Browse and explore your filesystem</p>
+                    <div class="input-group">
+                        <label for="dir-path">Directory Path:</label>
+                        <input type="text" id="dir-path" placeholder="C:\Users" />
+                    </div>
+                    <button class="btn" onclick="listDirectory()">Browse Directory</button>
+                </div>
+
+                <!-- Drive Detection -->
+                <div class="function-card" id="drive-card">
+                    <h3><span class="emoji">💾</span> Drive Scanner</h3>
+                    <p>Detect removable drives and storage devices</p>
+                    <button class="btn" onclick="detectDrives()">Scan Drives</button>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="function-card" id="quick-card">
+                    <h3><span class="emoji">🚀</span> Quick Actions</h3>
+                    <p>Common system operations at your fingertips</p>
+                    <button class="btn" onclick="quickAction('ping google.com')">Test Network</button>
+                    <button class="btn" onclick="quickAction('whoami')" style="margin-top: 10px;">Current User</button>
+                    <button class="btn" onclick="quickAction('date /t & time /t')" style="margin-top: 10px;">Date & Time</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h3><span class="emoji">📋</span> Output Console</h3>
+                <div class="output-display" id="output">
+Welcome to Root Agent Control Panel! 🎉
+
+Ready to execute commands and manage your system.
+Type commands above and see results here.
+
+Security features are active:
+✅ Dangerous command protection
+✅ Protected file access control
+✅ Rate limiting enabled
+✅ Operation logging active
+
+Status: Ready for operations
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Agent Status: <span class="success">Online</span></span>
+            </div>
+            <div>
+                <span>Operations: <span id="op-count">0</span> | Last: <span id="last-op">None</span></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let operationCount = 0;
+
+        function updateOutput(text, type = 'info') {
+            const output = document.getElementById('output');
+            const timestamp = new Date().toLocaleTimeString();
+            const prefix = type === 'error' ? '❌' : type === 'success' ? '✅' : 'ℹ️';
+            
+            output.textContent += `\n[${timestamp}] ${prefix} ${text}`;
+            output.scrollTop = output.scrollHeight;
+            
+            operationCount++;
+            document.getElementById('op-count').textContent = operationCount;
+            document.getElementById('last-op').textContent = timestamp;
+        }
+
+        function setLoading(cardId, loading) {
+            const card = document.getElementById(cardId);
+            if (loading) {
+                card.classList.add('loading');
+            } else {
+                card.classList.remove('loading');
+            }
+        }
+
+        async function makeRequest(endpoint, data) {
+            try {
+                const response = await fetch(`/api/${endpoint}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                throw new Error(`Network error: ${error.message}`);
+            }
+        }
+
+        async function executeCommand() {
+            const command = document.getElementById('command-input').value.trim();
+            if (!command) {
+                updateOutput('Please enter a command', 'error');
+                return;
+            }
+
+            setLoading('cmd-card', true);
+            updateOutput(`Executing: ${command}`);
+
+            try {
+                const result = await makeRequest('command', { command });
+                if (result.success) {
+                    updateOutput(`Result: ${result.output}`, 'success');
+                } else {
+                    updateOutput(`Error: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                updateOutput(`Failed: ${error.message}`, 'error');
+            } finally {
+                setLoading('cmd-card', false);
+            }
+        }
+
+        async function readFile() {
+            const filePath = document.getElementById('file-path').value.trim();
+            if (!filePath) {
+                updateOutput('Please enter a file path', 'error');
+                return;
+            }
+
+            setLoading('file-card', true);
+            updateOutput(`Reading file: ${filePath}`);
+
+            try {
+                const result = await makeRequest('read_file', { path: filePath });
+                if (result.success) {
+                    updateOutput(`File content:\n${result.content}`, 'success');
+                } else {
+                    updateOutput(`Error: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                updateOutput(`Failed: ${error.message}`, 'error');
+            } finally {
+                setLoading('file-card', false);
+            }
+        }
+
+        async function writeFile() {
+            const filePath = document.getElementById('file-path').value.trim();
+            const content = document.getElementById('file-content').value;
+            
+            if (!filePath) {
+                updateOutput('Please enter a file path', 'error');
+                return;
+            }
+
+            setLoading('file-card', true);
+            updateOutput(`Writing to file: ${filePath}`);
+
+            try {
+                const result = await makeRequest('write_file', { path: filePath, content });
+                if (result.success) {
+                    updateOutput(`File written successfully`, 'success');
+                } else {
+                    updateOutput(`Error: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                updateOutput(`Failed: ${error.message}`, 'error');
+            } finally {
+                setLoading('file-card', false);
+            }
+        }
+
+        async function getSystemInfo() {
+            setLoading('system-card', true);
+            updateOutput('Gathering system information...');
+
+            try {
+                const result = await makeRequest('system_info', {});
+                if (result.success) {
+                    const info = JSON.stringify(result.data, null, 2);
+                    updateOutput(`System Info:\n${info}`, 'success');
+                } else {
+                    updateOutput(`Error: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                updateOutput(`Failed: ${error.message}`, 'error');
+            } finally {
+                setLoading('system-card', false);
+            }
+        }
+
+        async function listDirectory() {
+            const dirPath = document.getElementById('dir-path').value.trim();
+            if (!dirPath) {
+                updateOutput('Please enter a directory path', 'error');
+                return;
+            }
+
+            setLoading('dir-card', true);
+            updateOutput(`Listing directory: ${dirPath}`);
+
+            try {
+                const result = await makeRequest('list_directory', { path: dirPath });
+                if (result.success) {
+                    const listing = JSON.stringify(result.data, null, 2);
+                    updateOutput(`Directory contents:\n${listing}`, 'success');
+                } else {
+                    updateOutput(`Error: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                updateOutput(`Failed: ${error.message}`, 'error');
+            } finally {
+                setLoading('dir-card', false);
+            }
+        }
+
+        async function detectDrives() {
+            setLoading('drive-card', true);
+            updateOutput('Scanning for removable drives...');
+
+            try {
+                const result = await makeRequest('detect_drives', {});
+                if (result.success) {
+                    const drives = result.data.map(d => `${d.device} (${d.fstype})`).join('\n');
+                    updateOutput(`Found drives:\n${drives}`, 'success');
+                } else {
+                    updateOutput(`Error: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                updateOutput(`Failed: ${error.message}`, 'error');
+            } finally {
+                setLoading('drive-card', false);
+            }
+        }
+
+        async function quickAction(command) {
+            setLoading('quick-card', true);
+            updateOutput(`Quick action: ${command}`);
+
+            try {
+                const result = await makeRequest('command', { command });
+                if (result.success) {
+                    updateOutput(`Result: ${result.output}`, 'success');
+                } else {
+                    updateOutput(`Error: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                updateOutput(`Failed: ${error.message}`, 'error');
+            } finally {
+                setLoading('quick-card', false);
+            }
+        }
+
+        // Allow Enter key to execute command
+        document.getElementById('command-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                executeCommand();
+            }
+        });
+
+        // Welcome message
+        updateOutput('Root Agent Control Panel initialized successfully! 🚀', 'success');
+    </script>
+</body>
+</html> 
