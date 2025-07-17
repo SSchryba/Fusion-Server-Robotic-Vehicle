@@ -1,0 +1,32 @@
+[project]
+name = "repl-nix-workspace"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.11"
+dependencies = [
+    "apscheduler>=3.11.0",
+    "automerge>=0.1.2",
+    "colorama>=0.4.6",
+    "ecdsa>=0.19.1",
+    "email-validator>=2.2.0",
+    "flask-socketio>=5.5.1",
+    "flask>=3.1.0",
+    "flask-sqlalchemy>=3.1.1",
+    "gunicorn>=23.0.0",
+    "psycopg2-binary>=2.9.10",
+    "pycryptodome>=3.22.0",
+    "pyfiglet>=1.0.2",
+    "pygithub>=2.6.1",
+    "sendgrid>=6.11.0",
+    "trafilatura>=2.0.0",
+    "eventlet>=0.39.1",
+    "bitcoinlib>=0.7.3",
+    "venmo-api",
+    "openai>=1.0.0",
+    "SpeechRecognition>=3.10.0",
+    "pyttsx3>=2.90",
+    "pyautogui>=0.9.54",
+]
+
+[tool.uv.sources]
+venmo-api = { path = "Venmo" }
