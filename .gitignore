@@ -63,9 +63,6 @@ models/
 *.gguf
 *.model
 
-# SEO/Marketing optimization files (not AI optimization)
-optimize/
-
 # System files
 *.pid
 *.sock
